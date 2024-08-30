@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { OuterChrome } from '@avi/shared/components';
 import styles from './app.module.scss';
-
-import NxWelcome from './nx-welcome';
 
 export function App() {
   return (
-    <div>
-      <NxWelcome title="site" />
-    </div>
+    <OuterChrome>
+      <h1>Welcome to site!</h1>
+    </OuterChrome>
   );
 }
 

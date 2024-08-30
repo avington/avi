@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@avi/shared/auth": ["libs/auth/src/index.ts"],
+      "@avi/shared/components": ["libs/components/src/index.ts"],
+      "@avi/shared/hooks": ["libs/hooks/src/index.ts"],
+      "@avi/shared/store": ["libs/store/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
