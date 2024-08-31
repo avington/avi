@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Auth from './auth';
+import LoginButton from './login-button';
 
-describe('Auth', () => {
+describe('LoginButton', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Auth />);
+    const { baseElement } = render(<LoginButton />);
     expect(baseElement).toBeTruthy();
   });
 });
