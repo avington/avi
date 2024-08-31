@@ -13,6 +13,7 @@ export function Auth0AuthButton() {
 
   if (isAuthenticated) {
     return (
+      // user is authenticated
       <div>
         Hello {user?.name ?? ''}{' '}
         <button
