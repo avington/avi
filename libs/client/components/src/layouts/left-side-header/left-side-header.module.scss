@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+}
+
+.logo {
+  color: var(--material-color-green-800);
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Bebas Neue', Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+}
+
+.logo-link {
+  color: var(--material-color-green-800);
+  text-decoration: none;
+}
+
+.logo-link:visited {
+  color: var(--material-color-green-800);
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  color: var(--material-color-green-800);
+  text-decoration: none;
+}
+.logo-link:active {
+  color: var(--material-color-green-800);
+  text-decoration: none;
+}

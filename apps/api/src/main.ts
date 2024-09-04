@@ -10,12 +10,19 @@ import { checkJwt } from '@avi/server/auth';
 
 const app = express();
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
+const user = process.env.NX_PUBLIC_DEV_USER;
 
 app.use(
   cors({
     origin: clientDomain,
   })
 );
+
+// Add logging to checkJwt middleware
+app.use((req, res, next) => {
+  console.log('the temporary user is:', user);
+  next();
+});
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
