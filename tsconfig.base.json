@@ -15,11 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@avi/server/auth": ["server/server-auth/src/index.ts"],
-      "@avi/shared/auth": ["libs/auth/src/index.ts"],
-      "@avi/shared/components": ["libs/components/src/index.ts"],
-      "@avi/shared/hooks": ["libs/hooks/src/index.ts"],
-      "@avi/shared/store": ["libs/store/src/index.ts"]
+      "@avi/client-auth": ["libs/client/auth/src/index.ts"],
+      "@avi/client-components": ["libs/client/components/src/index.ts"],
+      "@avi/client-hooks": ["libs/client/hooks/src/index.ts"],
+      "@avi/client-store": ["libs/client/store/src/index.ts"],
+      "@avi/client/features/holdings": ["libs/client/features/holdings/src/index.ts"],
+      "@avi/client/features/home": ["libs/client/features/home/src/index.ts"],
+      "@avi/client/features/portfolios": ["libs/client/features/portfolios/src/index.ts"],
+      "@avi/server/auth": ["libs/server/auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

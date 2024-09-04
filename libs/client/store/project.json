@@ -1,0 +1,9 @@
+{
+  "name": "client-store",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/store/src",
+  "projectType": "library",
+  "tags": ["scope:shared scope:shared-store"],
+  "// targets": "to see all targets run: nx show project client-store --web",
+  "targets": {}
+}
