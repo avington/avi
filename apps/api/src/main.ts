@@ -6,6 +6,7 @@
 import express from 'express';
 import * as path from 'path';
 import cors from 'cors';
+import { checkJwt } from '@avi/server/auth';
 
 const app = express();
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
@@ -20,6 +21,10 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
+});
+
+app.get('/api/secure', checkJwt, (req, res) => {
+  res.send({ message: 'Welcome to the secure api!' });
 });
 
 const port = process.env.NX_PUBLIC_API_PORT || 3334;
