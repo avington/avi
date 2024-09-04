@@ -1,17 +1,15 @@
-import { PropsWithChildren } from 'react';
-import styles from './auth0-authentication-provider.module.scss';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { PropsWithChildren } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Auth0AuthenticationProviderProps {}
 
-export function Auth0AuthenticationProvider({
-  children,
-}: PropsWithChildren<Auth0AuthenticationProviderProps>) {
+export function Auth0AuthenticationProvider({ children }: PropsWithChildren<Auth0AuthenticationProviderProps>) {
+  const authProps = { domain: import.meta.env.VITE_AUTH0_DOMAIN, clientId: import.meta.env.VITE_AUTH0_CLIENT_ID };
+  console.log('authProps', authProps);
   return (
     <Auth0Provider
-      domain="i-avington.auth0.com"
-      clientId="xoj8epASneETvJRvZ03hwdbBieuPNept"
+      {...authProps}
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}

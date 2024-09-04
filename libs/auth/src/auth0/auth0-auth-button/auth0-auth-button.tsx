@@ -12,6 +12,7 @@ export function Auth0AuthButton() {
   }
 
   if (isAuthenticated) {
+    console.log('user', user);
     return (
       // user is authenticated
       <div>

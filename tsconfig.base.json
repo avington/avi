@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@avi/server/auth": ["server/server-auth/src/index.ts"],
       "@avi/shared/auth": ["libs/auth/src/index.ts"],
       "@avi/shared/components": ["libs/components/src/index.ts"],
       "@avi/shared/hooks": ["libs/hooks/src/index.ts"],
