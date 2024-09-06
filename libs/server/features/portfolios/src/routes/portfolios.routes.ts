@@ -1,9 +1,8 @@
 import { Express, Request, Response } from 'express';
+import { getPortfolios } from '../controllers/portfolios.controller';
 
 export const addPortfolioRoutes = (app: Express) => {
-  app.get('/api/portfolios', (req: Request, res: Response) => {
-    res.send({ message: 'Welcome to portfolios!' });
-  });
+  app.get('/api/portfolios', getPortfolios);
 
   app.post('/api/portfolios', (req: Request, res: Response) => {
     res.send({ message: 'Creating a new portfolio!' });
