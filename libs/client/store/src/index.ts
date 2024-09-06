@@ -1,4 +1,6 @@
 export * from './store';
 
 //redirect to the store
-export * from './reducers/auth.reducer';
+export * from './store/auth.reducer';
+export * from './store/portfolios.reducer';
+export * from './store/portfolio.selectors';

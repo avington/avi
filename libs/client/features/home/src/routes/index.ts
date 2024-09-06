@@ -1,3 +1,3 @@
 import { homeRoutes } from './home.routes';
 
-export const HomeFeature = () => [...homeRoutes()];
+export const getHomeRoutes = () => [...homeRoutes()];
