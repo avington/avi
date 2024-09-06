@@ -22,7 +22,12 @@
       "@avi/client/features/holdings": ["libs/client/features/holdings/src/index.ts"],
       "@avi/client/features/home": ["libs/client/features/home/src/index.ts"],
       "@avi/client/features/portfolios": ["libs/client/features/portfolios/src/index.ts"],
-      "@avi/server/auth": ["libs/server/auth/src/index.ts"]
+      "@avi/global/models": ["libs/global/models/src/index.ts"],
+      "@avi/global/services": ["libs/global/services/src/index.ts"],
+      "@avi/serer/database": ["libs/server/database/src/index.ts"],
+      "@avi/server/auth": ["libs/server/auth/src/index.ts"],
+      "@avi/server/features/holdings": ["libs/server/features/holdings/src/index.ts"],
+      "@avi/server/features/portfolios": ["libs/server/features/portfolios/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
