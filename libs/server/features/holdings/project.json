@@ -1,0 +1,19 @@
+{
+  "name": "server-holdings",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/server/features/holdings/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/server/features/holdings",
+        "main": "libs/server/features/holdings/src/index.ts",
+        "tsConfig": "libs/server/features/holdings/tsconfig.lib.json",
+        "assets": ["libs/server/features/holdings/*.md"]
+      }
+    }
+  }
+}

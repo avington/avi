@@ -34,6 +34,8 @@ app.get('/api/secure', checkJwt, (req, res) => {
   res.send({ message: 'Welcome to the secure api!' });
 });
 
+
+
 const port = process.env.NX_PUBLIC_API_PORT || 3334;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);

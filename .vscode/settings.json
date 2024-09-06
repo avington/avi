@@ -45,7 +45,8 @@
     "thrcb",
     "Transcriptconfig",
     "uisettings",
-    "uncookie"
+    "uncookie",
+    "webstore"
   ],
   "typescript.format.enable": false,
   "[typescriptreact]": {
