@@ -11,7 +11,7 @@ export interface PortfoliosState {
 }
 
 export const initialState: PortfoliosState = {
-  portfolios: null,
+  portfolios: [],
   loadingStatus: 'idle',
   selectedPortfolio: null,
   error: null,

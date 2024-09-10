@@ -3,22 +3,22 @@ import { RootState } from '.';
 
 export const selectPortfolios = createSelector(
   (root: RootState) => root.portfolios,
-  (state) => state.portfolios
+  (state) => state?.portfolios
 );
 
 export const selectSelectedPortfolio = createSelector(
   (root: RootState) => root.portfolios,
-  (state) => state.selectedPortfolio
+  (state) => state?.selectedPortfolio
 );
 
 export const selectPortfoliosLoadingStatus = createSelector(
   (root: RootState) => root.portfolios,
-  (state) => state.loadingStatus
+  (state) => state?.loadingStatus
 );
 
 export const selectPortfoliosError = createSelector(
   (root: RootState) => root.portfolios,
-  (state) => state.error
+  (state) => state?.error
 );
 
 export const selectPortfolioIsLoading = createSelector(

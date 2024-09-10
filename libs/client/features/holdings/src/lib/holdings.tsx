@@ -12,7 +12,6 @@ export function Holdings() {
           <Link to="/">holdings\src\lib\holdings root</Link>
         </li>
       </ul>
-      <Route path="/" element={<div>This is the holdings\src\lib\holdings root route.</div>} />
     </div>
   );
 }
