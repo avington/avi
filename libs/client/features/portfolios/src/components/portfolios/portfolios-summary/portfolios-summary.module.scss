@@ -1,7 +1,48 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+
+.container {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: 'total total . . . newButton'
+    'cash dayChange unrealized realized . .';
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+}
+
+.total {
+  grid-area: total;
+}
+
+.cash {
+  grid-area: cash;
+}
+
+.day-change {
+  grid-area: dayChange;
+}
+
+.unrealized {
+  grid-area: unrealized;
+}
+
+.realized {
+  grid-area: realized;
+}
+
+.new {
+  grid-area: newButton;
+}
+
+.cell-heading {
+  font-weight: bold;
+}
+
+.total-number {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.other-totals {
+  font-size: 1.5rem;
+  font-weight: 500;
+}

@@ -8,6 +8,7 @@ import {
   useAppSelector,
 } from '@avi/client-store';
 import { useEffect } from 'react';
+import PortfoliosSummary from '../../components/portfolios/portfolios-summary/portfolios-summary';
 
 export function PortfoliosView() {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ export function PortfoliosView() {
   return (
     <ViewContainer>
       <div className={styles.portfoliosView}>
-        <h1>Portfolios</h1>
+        <PortfoliosSummary />
         <div>{JSON.stringify(portfolios)}</div>
       </div>
     </ViewContainer>
