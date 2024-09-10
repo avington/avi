@@ -19,6 +19,7 @@
       "@avi/client-components": ["libs/client/components/src/index.ts"],
       "@avi/client-hooks": ["libs/client/hooks/src/index.ts"],
       "@avi/client-store": ["libs/client/store/src/index.ts"],
+      "@avi/client-tests": ["libs/client/tests/src/index.ts"],
       "@avi/client/features/holdings": ["libs/client/features/holdings/src/index.ts"],
       "@avi/client/features/home": ["libs/client/features/home/src/index.ts"],
       "@avi/client/features/portfolios": ["libs/client/features/portfolios/src/index.ts"],

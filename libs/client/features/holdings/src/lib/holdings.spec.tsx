@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { render } from '@avi/client-tests';
 
 import Holdings from './holdings';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Holdings', () => {
   it('should render successfully', () => {

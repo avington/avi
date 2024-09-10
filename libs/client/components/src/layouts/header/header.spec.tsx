@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '@avi/client-tests';
 
 import Header from './header';
 
