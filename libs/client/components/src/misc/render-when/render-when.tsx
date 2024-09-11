@@ -7,7 +7,7 @@ export type WhenProps = {
   limit?: number;
 };
 
-export const RenderWhen = ({ limit, isTrue, children }: WhenProps) => {
+export const RenderWhen = ({ children, limit = 1, isTrue = true }: WhenProps) => {
   const list: React.ReactNode[] = [];
 
   if (isTrue !== true) {
@@ -24,11 +24,6 @@ export const RenderWhen = ({ limit, isTrue, children }: WhenProps) => {
   });
 
   return <>{list}</>;
-};
-
-RenderWhen.defaultProps = {
-  limit: 1,
-  isTrue: true,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

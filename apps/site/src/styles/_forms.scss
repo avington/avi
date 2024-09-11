@@ -1,0 +1,30 @@
+.form-field {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+:root {
+  --error-border: 1px solid var(--material-color-red-500);
+}
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  position: absolute;
+  bottom: -1.5rem;
+  right: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  width: 100%;
+  gap: 1rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}

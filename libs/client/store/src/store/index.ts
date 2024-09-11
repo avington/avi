@@ -1,12 +1,14 @@
-import { auth } from 'express-oauth2-jwt-bearer';
-import authReducer from './auth.reducer';
-import portfoliosReducer from './portfolios.reducer';
-import { configureStore, createListenerMiddleware, createStore, TypedStartListening } from '@reduxjs/toolkit';
+import { configureStore, createListenerMiddleware, TypedStartListening } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import authReducer from './auth.reducer';
+import { addPortfolioSummaryListener } from './portfolios-summary.listener';
+import portfoliosReducer from './portfolios.reducer';
+import portfoliosSummaryReducer from './portfolios-summary.reducer';
 
 const reducer = {
   auth: authReducer,
   portfolios: portfoliosReducer,
+  portFoliosSummary: portfoliosSummaryReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();
@@ -25,3 +27,6 @@ export const startAppListening = listenerMiddleware.startListening as AppStartLi
 // store hooks
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+// listeners
+addPortfolioSummaryListener(startAppListening);
