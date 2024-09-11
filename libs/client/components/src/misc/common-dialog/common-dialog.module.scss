@@ -1,0 +1,40 @@
+.container {
+  /* existing styles */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  color: var(--material-color-grey-800);
+  border: none;
+  background: none;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
