@@ -9,9 +9,22 @@ export interface Portfolio {
   updatedAt?: Date;
   isActive?: boolean;
   totalSymbols?: number;
+  totalCostBases: number;
+  dayChange?: {
+    amount: number;
+    percentage: number;
+  };
   totalMarketValue?: number;
   cashHoldings?: number;
-  realizedGains?: number;
-  unrealizedGains?: number;
+  realizedGains?: {
+    total: { amount: number; percentage: number };
+    shortTerm: { amount: number; percentage: number };
+    longTerm: { amount: number; percentage: number };
+  };
+  unrealizedGains?: {
+    total: { amount: number; percentage: number };
+    shortTerm: { amount: number; percentage: number };
+    longTerm: { amount: number; percentage: number };
+  };
   positions?: Position[];
 }

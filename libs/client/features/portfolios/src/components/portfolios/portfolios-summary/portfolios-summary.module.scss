@@ -1,11 +1,11 @@
-
 .container {
   display: grid;
   gap: 1rem;
-  grid-template-areas: 'total total . . . newButton'
+  grid-template-areas:
+    'total total . . . newButton'
     'cash dayChange unrealized realized . .';
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   width: 100%;
 }
 
