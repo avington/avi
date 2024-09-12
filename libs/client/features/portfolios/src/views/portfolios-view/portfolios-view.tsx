@@ -1,4 +1,4 @@
-import { ViewContainer } from '@avi/client-components';
+import { StyledTable, ViewContainer } from '@avi/client-components';
 import styles from './portfolios-view.module.scss';
 import {
   loadPortfolioAction,
@@ -9,6 +9,7 @@ import {
 } from '@avi/client-store';
 import { useEffect } from 'react';
 import PortfoliosSummary from '../../components/portfolios/portfolios-summary/portfolios-summary';
+import PortfolioTable from '../../components/portfolios/portfolios-table/portfolios-table';
 
 export function PortfoliosView() {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ export function PortfoliosView() {
     <ViewContainer>
       <div className={styles.portfoliosView}>
         <PortfoliosSummary />
-        <div>{JSON.stringify(portfolios)}</div>
+        <PortfolioTable loading={loadingStatus === 'loading'} portfolios={portfolios} />
       </div>
     </ViewContainer>
   );

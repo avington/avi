@@ -31,8 +31,14 @@ export function PortfolioFormDialog({ isOpen, onClose, portfolio, onUpdate }: Po
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
+
+          const updatedPortfolio: Portfolio = {
+            ...portfolio,
+            ...values,
+            id: portfolio?.id || '', // Ensure id is defined
+          } as Portfolio;
           // Handle form submission here
-          console.log('Form values:', values);
+          onUpdate(updatedPortfolio);
 
           onClose();
         }}
@@ -45,7 +51,7 @@ export function PortfolioFormDialog({ isOpen, onClose, portfolio, onUpdate }: Po
                 type="text"
                 name="name"
                 required={true}
-                hasError={(touched?.name ?? false) && (!!errors?.name ?? false)}
+                hasError={(touched?.name ?? false) && !!errors?.name}
               />
               <ErrorMessage name="name" component="div" className="error-message" />
             </div>

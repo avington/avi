@@ -35,7 +35,14 @@ export const patchPortfolioHandler = async (req: Request, res: Response) => {
 
 type MapPortfolioType = (portfolio: Portfolio) => Portfolio;
 
-const mapPortfolio: MapPortfolioType = (portfolio: Portfolio) => {
+const mapPortfolio: MapPortfolioType = (portfolio: Portfolio): Portfolio => {
+  const totalRealized = portfolio?.realizedGains?.total ?? { amount: 0, percentage: 0 };
+  const shortTermRealized = portfolio?.realizedGains?.shortTerm ?? { amount: 0, percentage: 0 };
+  const longTermRealized = portfolio?.realizedGains?.longTerm ?? { amount: 0, percentage: 0 };
+  const totalUnrealized = portfolio?.unrealizedGains?.total ?? { amount: 0, percentage: 0 };
+  const shortTermUnrealized = portfolio?.unrealizedGains?.shortTerm ?? { amount: 0, percentage: 0 };
+  const longTermUnrealized = portfolio?.unrealizedGains?.longTerm ?? { amount: 0, percentage: 0 };
+
   return {
     id: portfolio.id,
     email: portfolio.email,
@@ -47,8 +54,20 @@ const mapPortfolio: MapPortfolioType = (portfolio: Portfolio) => {
     totalSymbols: portfolio.totalSymbols,
     totalMarketValue: portfolio.totalMarketValue,
     cashHoldings: portfolio.cashHoldings,
-    realizedGains: portfolio.realizedGains,
-    unrealizedGains: portfolio.unrealizedGains,
+    realizedGains: {
+      ...portfolio?.realizedGains,
+      total: totalRealized,
+      shortTerm: shortTermRealized,
+      longTerm: longTermRealized,
+    },
+    unrealizedGains: {
+      ...portfolio?.unrealizedGains,
+      total: totalUnrealized,
+      shortTerm: shortTermUnrealized,
+      longTerm: longTermUnrealized,
+    },
     positions: portfolio.positions,
+    totalCostBases: portfolio.totalCostBases,
+    dayChange: portfolio.dayChange,
   };
 };

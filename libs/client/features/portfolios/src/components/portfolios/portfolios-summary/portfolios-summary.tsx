@@ -3,14 +3,19 @@ import styles from './portfolios-summary.module.scss';
 import { useBoolean } from '@avi/client-hooks';
 
 import PortfolioFormDialog from '../portfolio-form-dialog/portfolio-form-dialog';
+import { Portfolio } from '@avi/global/models';
+import { useCallback } from 'react';
 
 export function PortfoliosSummary() {
   const { setTrue, setFalse, value: isOpen } = useBoolean(false);
 
   const handleOpen = () => {
-    console.log('Open dialog');
     setTrue();
   };
+
+  const handleUpdate = useCallback((portfolio: Portfolio) => {
+    console.warn('Function not implemented.', portfolio);
+  }, []);
 
   return (
     <>
@@ -41,7 +46,7 @@ export function PortfoliosSummary() {
           <div>$5,000 (5.0%)</div>
         </div>
       </LargePanel>
-      <PortfolioFormDialog isOpen={isOpen} onClose={setFalse} />
+      <PortfolioFormDialog isOpen={isOpen} onClose={setFalse} onUpdate={handleUpdate} />
     </>
   );
 }

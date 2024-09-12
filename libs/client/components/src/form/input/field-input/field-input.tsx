@@ -1,6 +1,6 @@
 import { useField, useFormikContext } from 'formik';
 import styles from './field-input.module.scss';
-import StyledInput from '../styled-input';
+import { StyledInput } from '../styled-input';
 
 export interface FieldInputProps {
   name: string;
@@ -13,7 +13,7 @@ export interface FieldInputProps {
 export function FieldInput({ name, disabled, required = false, type = 'text', hasError = false }: FieldInputProps) {
   const { handleBlur, handleChange } = useFormikContext();
   const [field] = useField({ name, type, required, disabled, onBlur: handleBlur, onChange: handleChange });
-  console.log('hasError', hasError);
+
   return <StyledInput {...field} id={field.name} style={hasError ? { border: 'var(--error-border)' } : {}} />;
 }
 
