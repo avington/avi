@@ -1,0 +1,21 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+.content {
+  color: var(--inverse-primary-color);
+}
+
+.toast-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+}

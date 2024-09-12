@@ -1,12 +1,10 @@
 import { Express, Request, Response } from 'express';
-import { getPortfolios } from '../controllers/portfolios.controller';
+import { getPortfolios, insertPortfolioHandler } from '../controllers/portfolios.controller';
 
 export const addPortfolioRoutes = (app: Express) => {
   app.get('/api/portfolios', getPortfolios);
 
-  app.post('/api/portfolios', (req: Request, res: Response) => {
-    res.send({ message: 'Creating a new portfolio!' });
-  });
+  app.post('/api/portfolios', insertPortfolioHandler);
 
   app.delete('/api/portfolios/:id', (req: Request, res: Response) => {
     res.send({ message: 'Deleting a portfolio!' });

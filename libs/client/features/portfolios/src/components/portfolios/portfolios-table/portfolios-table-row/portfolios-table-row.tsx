@@ -1,8 +1,7 @@
+import { TableCell, TableRow } from '@avi/client-components';
 import { Portfolio } from '@avi/global/models';
+import { formatCurrency, formatCurrencyAndPercentage, formatNumber } from '@avi/global/services';
 import styles from './portfolios-table-row.module.scss';
-import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
-import { formatNumber, formatCurrency, formatCurrencyAndPercentage } from '@avi/global/services';
-import { format } from 'path';
 
 export interface PortfoliosTableRowProps {
   portfolio: Portfolio;

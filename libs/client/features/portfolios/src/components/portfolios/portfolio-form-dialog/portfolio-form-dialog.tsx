@@ -1,8 +1,7 @@
-import { Portfolio } from '@avi/global/models';
-import * as yup from 'yup';
-import styles from './portfolio-form-dialog.module.scss';
 import { CommonButton, CommonDialog, FieldInput } from '@avi/client-components';
-import { Formik, Field, ErrorMessage, Form } from 'formik';
+import { Portfolio } from '@avi/global/models';
+import { ErrorMessage, Form, Formik } from 'formik';
+import * as yup from 'yup';
 
 export interface PortfolioFormDialogProps {
   isOpen: boolean;

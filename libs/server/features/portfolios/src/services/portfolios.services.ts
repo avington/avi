@@ -18,7 +18,7 @@ export const insertPortfolio = async (portfolio: Portfolio) => {
   return response.resource;
 };
 
-export const patchPortfolio = async (portfolio: Portfolio) => {
+export const patchPortfolio = async (portfolio: Partial<Portfolio>) => {
   const response: ItemResponse<ItemDefinition> = await portfoliosContainer.items.upsert(portfolio);
   return response.resource;
 };

@@ -21,14 +21,26 @@ export const getPortfolios = async (req: Request, res: Response) => {
 
 export const insertPortfolioHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
-  const portfolio = await insertPortfolio({ ...req.body, email: user });
+
+  const newPortfolio = {
+    email: user,
+    name: req.body.name,
+    description: req.body.description,
+    isActive: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  const portfolio = await insertPortfolio(newPortfolio);
   const mappedPortfolio = mapPortfolio(portfolio as Portfolio);
   res.status(201).json(mappedPortfolio);
 };
 
 export const patchPortfolioHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
-  const result = await patchPortfolio({ ...req.body, email: user });
+  const name = req.body.name;
+  const description = req.body.description;
+  const result = await patchPortfolio({ email: user, name, description, updatedAt: new Date() });
 
   res.status(200).json({ id: result?.id });
 };

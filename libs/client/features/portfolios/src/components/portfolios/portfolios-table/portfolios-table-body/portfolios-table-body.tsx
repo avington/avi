@@ -1,6 +1,4 @@
 import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
-import { formatNumber, formatCurrency, formatPercentage } from '@avi/global/services';
-import styles from './portfolios-table-body.module.scss';
 import { Portfolio } from '@avi/global/models';
 import { Skeleton } from '@mui/material';
 import PortfoliosTableRow from '../portfolios-table-row/portfolios-table-row';
