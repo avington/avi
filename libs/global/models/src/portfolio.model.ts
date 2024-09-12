@@ -1,7 +1,7 @@
 import { Position } from './position.model';
 
 export interface Portfolio {
-  id: string;
+  id?: string;
   email: string;
   name: string;
   description?: string;
@@ -9,7 +9,7 @@ export interface Portfolio {
   updatedAt?: Date;
   isActive?: boolean;
   totalSymbols?: number;
-  totalCostBases: number;
+  totalCostBases?: number;
   dayChange?: {
     amount: number;
     percentage: number;

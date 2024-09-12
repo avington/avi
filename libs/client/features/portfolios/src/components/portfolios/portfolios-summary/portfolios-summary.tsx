@@ -1,21 +1,34 @@
-import { LargePanel, CommonButton } from '@avi/client-components';
+import { LargePanel, CommonButton, CommonToaster } from '@avi/client-components';
 import styles from './portfolios-summary.module.scss';
 import { useBoolean } from '@avi/client-hooks';
 
 import PortfolioFormDialog from '../portfolio-form-dialog/portfolio-form-dialog';
 import { Portfolio } from '@avi/global/models';
 import { useCallback } from 'react';
+import { addPortfolioAction, useAppDispatch } from '@avi/client-store';
 
 export function PortfoliosSummary() {
-  const { setTrue, setFalse, value: isOpen } = useBoolean(false);
+  const { setTrue: setModalTrue, setFalse: setModalFalse, value: isModalOpen } = useBoolean(false);
+  const { setTrue: setAddSuccessTrue, setFalse: setAddSuccessFalse, value: isAddSuccessToaster } = useBoolean(false);
+  const { setTrue: setAddFailedTrue, setFalse: setAddFailedFalse, value: isAddFailedToaster } = useBoolean(false);
+  const dispatch = useAppDispatch();
 
   const handleOpen = () => {
-    setTrue();
+    setModalTrue();
   };
 
-  const handleUpdate = useCallback((portfolio: Portfolio) => {
-    console.warn('Function not implemented.', portfolio);
-  }, []);
+  const handleUpdate = useCallback(
+    (portfolio: Portfolio) => {
+      dispatch(addPortfolioAction(portfolio))
+        .then(() => {
+          setAddSuccessTrue();
+        })
+        .catch(() => {
+          setAddFailedTrue();
+        });
+    },
+    [dispatch, setAddFailedTrue, setAddSuccessTrue]
+  );
 
   return (
     <>
@@ -46,7 +59,21 @@ export function PortfoliosSummary() {
           <div>$5,000 (5.0%)</div>
         </div>
       </LargePanel>
-      <PortfolioFormDialog isOpen={isOpen} onClose={setFalse} onUpdate={handleUpdate} />
+      <PortfolioFormDialog isOpen={isModalOpen} onClose={setModalFalse} onUpdate={handleUpdate} />
+      <CommonToaster
+        closeIconText="Close"
+        theme="success"
+        isVisible={isAddSuccessToaster}
+        message="Portfolio added."
+        onClose={setAddSuccessFalse}
+      />
+      <CommonToaster
+        closeIconText="Close"
+        theme="error"
+        isVisible={isAddFailedToaster}
+        message="Error adding portfolio."
+        onClose={setAddFailedFalse}
+      />
     </>
   );
 }

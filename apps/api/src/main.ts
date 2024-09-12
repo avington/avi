@@ -4,10 +4,15 @@ import cors from 'cors';
 import { checkJwt } from '@avi/server/auth';
 import { addPortfolioRoutes } from '@avi/server/features/portfolios';
 
-const app = express();
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
 const user = process.env.NX_PUBLIC_DEV_USER;
 
+const app = express();
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Middleware to enable CORS
 app.use(
   cors({
     origin: clientDomain,
