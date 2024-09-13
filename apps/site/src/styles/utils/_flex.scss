@@ -1,0 +1,51 @@
+.flx {
+  display: flex;
+}
+
+.flx-center {
+  justify-content: center;
+}
+
+.flx-start {
+  justify-content: flex-start;
+}
+
+.flx-end {
+  justify-content: flex-end;
+}
+
+.flx-around {
+  justify-content: space-around;
+}
+
+.flx-between {
+  justify-content: space-between;
+}
+
+.flx-evenly {
+  justify-content: space-evenly;
+}
+
+.flx-rows {
+  flex-direction: row;
+}
+
+.flx-rows-reverse {
+  flex-direction: row-reverse;
+}
+
+.flx-column {
+  flex-direction: column;
+}
+
+.flx-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.flx-wrap {
+  flex-wrap: wrap;
+}
+
+.flx-11auto {
+  flex: 1 1 auto;
+}

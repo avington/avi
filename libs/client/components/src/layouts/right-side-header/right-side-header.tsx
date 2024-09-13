@@ -5,14 +5,14 @@ import styles from './right-side-header.module.scss';
 export function RightSideHeader() {
   const navigate = useNavigate();
   return (
-    <div className={styles['container']}>
+    <nav className={styles['container']}>
       <div>
         <Pill onClick={() => navigate('/portfolios')}>Portfolios</Pill>
       </div>
       <div>
         <Pill onClick={() => navigate('/accounts')}>Accounts</Pill>
       </div>
-    </div>
+    </nav>
   );
 }
 
