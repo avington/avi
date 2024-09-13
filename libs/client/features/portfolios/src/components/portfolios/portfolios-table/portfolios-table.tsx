@@ -1,4 +1,4 @@
-import { Table } from '@avi/client-components';
+import { LargePanel, Table } from '@avi/client-components';
 import styles from './portfolios-table.module.scss';
 import PortfoliosTableHeader from './portfolios-table-header/portfolios-table-header';
 import { Portfolio } from '@avi/global/models';
@@ -11,12 +11,12 @@ export interface PortfolioTableProps {
 
 export function PortfolioTable(props: PortfolioTableProps) {
   return (
-    <div className={styles['container']}>
+    <LargePanel className={styles['container']} style={{ width: '1280px' }}>
       <Table>
         <PortfoliosTableHeader />
         <PortfoliosTableBody {...props} />
       </Table>
-    </div>
+    </LargePanel>
   );
 }
 

@@ -66,3 +66,13 @@ html {
   line-height: 1.5;
   color: var(--material-color-blue-grey-800);
 }
+
+a {
+  color: var(--material-color-blue-800);
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--material-color-blue-900);
+  font-weight: 500;
+}

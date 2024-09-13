@@ -4,10 +4,10 @@ import styles from './header.module.scss';
 
 export function Header() {
   return (
-    <div className={styles['container']}>
+    <header className={styles['container']}>
       <LeftSideHeader />
       <RightSideHeader />
-    </div>
+    </header>
   );
 }
 
