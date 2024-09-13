@@ -2,6 +2,7 @@ import { TableCell, TableRow } from '@avi/client-components';
 import { Portfolio } from '@avi/global/models';
 import { formatCurrency, formatCurrencyAndPercentage, formatNumber } from '@avi/global/services';
 import styles from './portfolios-table-row.module.scss';
+import { Link } from 'react-router-dom';
 
 export interface PortfoliosTableRowProps {
   portfolio: Portfolio;
@@ -10,7 +11,9 @@ export interface PortfoliosTableRowProps {
 export function PortfoliosTableRow({ portfolio }: PortfoliosTableRowProps) {
   return (
     <TableRow key={portfolio.id} className={styles.row}>
-      <TableCell>{portfolio.name}</TableCell>
+      <TableCell>
+        <Link to={`/positions/${portfolio.id}`}>{portfolio.name}</Link>{' '}
+      </TableCell>
       <TableCell>{formatNumber(portfolio?.totalSymbols ?? 0)}</TableCell>
       <TableCell>{formatCurrency(portfolio?.totalCostBases ?? 0)}</TableCell>
       <TableCell>{formatCurrency(portfolio?.totalMarketValue ?? 0)}</TableCell>
