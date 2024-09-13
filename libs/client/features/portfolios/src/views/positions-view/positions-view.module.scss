@@ -1,7 +1,5 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3rem 18.75rem 1fr;
+}
