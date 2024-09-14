@@ -1,0 +1,23 @@
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--material-color-teal-200);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase;
+  &:last-child {
+    border-bottom: none;
+  }
+  .summary-item__label {
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .summary-item__value {
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+}
