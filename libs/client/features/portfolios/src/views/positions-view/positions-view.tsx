@@ -3,6 +3,7 @@ import styles from './positions-view.module.scss';
 import { ViewContainer } from '@avi/client-components';
 import PositionsTopMenu from '../../components/positions/positions-top-menu/positions-top-menu';
 import PositionsSummary from '../../components/positions/positions-summary/positions-summary';
+import PositionsTableContainer from '../../components/positions/positions-table-container/positions-table-container';
 
 export function PositionsView() {
   const { portfolioId } = useParams();
@@ -15,7 +16,9 @@ export function PositionsView() {
       <div>
         <PositionsSummary />
       </div>
-      <div>positions table</div>
+      <div>
+        <PositionsTableContainer />
+      </div>
     </ViewContainer>
   );
 }

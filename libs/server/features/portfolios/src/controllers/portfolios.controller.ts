@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { fetchUserPortfolios, insertPortfolio, patchPortfolio } from '../services/portfolios.services';
+import { fetchUserPortfolios, insertPortfolio, patchPortfolio } from '../services/portfolios.service';
 import { Portfolio } from '@avi/global/models';
 
 /**
@@ -38,11 +38,20 @@ export const insertPortfolioHandler = async (req: Request, res: Response) => {
 
 export const patchPortfolioHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
+  const id = req.params['id'] as string;
   const name = req.body.name;
   const description = req.body.description;
-  const result = await patchPortfolio({ email: user, name, description, updatedAt: new Date() });
-
-  res.status(200).json({ id: result?.id });
+  try {
+    const result = await patchPortfolio(id, { email: user, name, description, updatedAt: new Date() });
+    if (result) {
+      res.status(200).json({ id: result.id });
+    } else {
+      res.status(404).json({ error: 'Portfolio not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(501).json({ error: 'Internal server error' });
+  }
 };
 
 type MapPortfolioType = (portfolio: Portfolio) => Portfolio;
