@@ -8,5 +8,6 @@ const aviportalDb = client.database('aviportal-webstore');
 // containers
 const accountsContainer = aviportalDb.container('accounts');
 const portfoliosContainer = aviportalDb.container('portfolios');
+const positionsContainer = aviportalDb.container('positions');
 
-export { accountsContainer, portfoliosContainer };
+export { accountsContainer, portfoliosContainer, positionsContainer };
