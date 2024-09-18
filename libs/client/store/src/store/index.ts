@@ -4,11 +4,13 @@ import authReducer from './auth.reducer';
 import { addPortfolioSummaryListener } from './portfolios-summary.listener';
 import portfoliosReducer from './portfolios.reducer';
 import portfoliosSummaryReducer from './portfolios-summary.reducer';
+import positionsReducer from './positions.reducer';
 
 const reducer = {
   auth: authReducer,
   portfolios: portfoliosReducer,
   portFoliosSummary: portfoliosSummaryReducer,
+  positions: positionsReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();

@@ -10,7 +10,7 @@ export function RightSideHeader() {
         <Pill onClick={() => navigate('/portfolios')}>Portfolios</Pill>
       </div>
       <div>
-        <Pill onClick={() => navigate('/accounts')}>Accounts</Pill>
+        <Pill onClick={() => navigate('/account')}>Account</Pill>
       </div>
     </nav>
   );
