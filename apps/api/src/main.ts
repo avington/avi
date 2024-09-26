@@ -1,8 +1,9 @@
+import { connectToDatabase } from '@avi/serer/database';
+import { portfolioRouter } from '@avi/server/features/portfolios';
+import cors from 'cors';
 import express from 'express';
 import * as path from 'path';
-import cors from 'cors';
-import { checkJwt } from '@avi/server/auth';
-import { addPortfolioRoutes } from '@avi/server/features/portfolios';
+import morgan from 'morgan';
 
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
 const user = process.env.NX_PUBLIC_DEV_USER;
@@ -19,23 +20,20 @@ app.use(
   })
 );
 
-// Add logging to checkJwt middleware
-app.use((req, res, next) => {
-  console.log('the temporary user is:', user);
-  next();
-});
+// middleware to log all the requests
+const dev = process.env.NX_PUBLIC_DEV;
+if (dev) {
+  app.use(morgan('combined'));
+}
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api!' });
-});
+// Middleware to handle all the routes
+app.use('/api/v1/portfolios', portfolioRouter);
 
-app.get('/api/secure', checkJwt, (req, res) => {
-  res.send({ message: 'Welcome to the secure api!' });
-});
-
-addPortfolioRoutes(app);
+// connect to mongo
+const db = async () => await connectToDatabase();
+db();
 
 const port = process.env.NX_PUBLIC_API_PORT || 3334;
 const server = app.listen(port, () => {

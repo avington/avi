@@ -1,1 +1,1 @@
-export * from './aviportal';
+export * from './mongodb.init';

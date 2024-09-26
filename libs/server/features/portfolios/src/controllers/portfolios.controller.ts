@@ -1,29 +1,25 @@
 import { Request, Response } from 'express';
-import { fetchUserPortfolios, insertPortfolio, patchPortfolio } from '../services/portfolios.service';
 import { Portfolio } from '@avi/global/models';
+import portfolioSchema from '../schemas/portfolio.schema';
+import StatusCodes from 'http-status-codes';
 
-/**
- * Filters and maps the given array of raw portfolios to create a new array of portfolios.
- * Only active portfolios are included in the result.
- *
- * @param rawPortfolios - The array of raw portfolios to process.
- * @returns An array of portfolios with selected properties.
- */
 export const getPortfolios = async (req: Request, res: Response) => {
-  const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
+  const user = process.env['NX_PUBLIC_USER_ID'] ?? 'anonymous';
 
-  const rawPortfolios = await fetchUserPortfolios(user);
-
-  const portfolios = rawPortfolios.filter((p) => p.isActive).map(mapPortfolio);
-
-  res.status(200).json(portfolios);
+  const portfolios = await portfolioSchema.find({ user });
+  res.status(StatusCodes.OK).json(
+    portfolios.map((portfolio) => ({
+      ...portfolio.toObject(),
+      id: portfolio._id,
+    }))
+  );
 };
 
 export const insertPortfolioHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
 
   const newPortfolio = {
-    email: user,
+    user: user,
     name: req.body.name,
     description: req.body.description,
     isActive: true,
@@ -31,7 +27,7 @@ export const insertPortfolioHandler = async (req: Request, res: Response) => {
     updatedAt: new Date(),
   };
 
-  const portfolio = await insertPortfolio(newPortfolio);
+  const portfolio = await portfolioSchema.create(newPortfolio);
   const mappedPortfolio = mapPortfolio(portfolio as Portfolio);
   res.status(201).json(mappedPortfolio);
 };
@@ -42,7 +38,13 @@ export const patchPortfolioHandler = async (req: Request, res: Response) => {
   const name = req.body.name;
   const description = req.body.description;
   try {
-    const result = await patchPortfolio(id, { email: user, name, description, updatedAt: new Date() });
+    const result = await portfolioSchema.findByIdAndUpdate(id, {
+      user: user,
+      name,
+      description,
+      updatedAt: new Date(),
+    });
+
     if (result) {
       res.status(200).json({ id: result.id });
     } else {
@@ -66,7 +68,7 @@ const mapPortfolio: MapPortfolioType = (portfolio: Portfolio): Portfolio => {
 
   return {
     id: portfolio.id,
-    email: portfolio.email,
+    user: portfolio.user,
     name: portfolio.name,
     description: portfolio?.description,
     createdAt: portfolio?.createdAt,
