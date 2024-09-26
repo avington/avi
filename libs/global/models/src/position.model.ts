@@ -2,7 +2,7 @@ import { Lot } from './lot.model';
 
 export interface Position {
   id?: string;
-  email: string;
+  user: string;
   portfolioId: string;
   symbol: string;
   name?: string;

@@ -2,7 +2,7 @@ import { Position } from './position.model';
 
 export interface Portfolio {
   id?: string;
-  email: string;
+  user: string;
   name: string;
   description?: string;
   createdAt?: Date;
