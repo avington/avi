@@ -4,7 +4,7 @@ import portfolioSchema from '../schemas/portfolio.schema';
 import StatusCodes from 'http-status-codes';
 
 export const getPortfolios = async (req: Request, res: Response) => {
-  const user = process.env['NX_PUBLIC_USER_ID'] ?? 'anonymous';
+  const user = process.env['NX_PUBLIC_DEV_USER'] ?? 'anonymous';
 
   const portfolios = await portfolioSchema.find({ user });
   res.status(StatusCodes.OK).json(
@@ -26,6 +26,8 @@ export const insertPortfolioHandler = async (req: Request, res: Response) => {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
+
+  console.log('newPortfolio', newPortfolio);
 
   const portfolio = await portfolioSchema.create(newPortfolio);
   const mappedPortfolio = mapPortfolio(portfolio as Portfolio);
