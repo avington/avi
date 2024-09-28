@@ -1,6 +1,6 @@
 import { isAnyOf } from '@reduxjs/toolkit';
-import { AppStartListening } from '.';
-import { loadPortfolioAction } from './portfolios.reducer';
+import { AppStartListening } from '..';
+import { loadPortfolioAction } from '../portfolios/portfolios.reducer';
 
 export const addPortfolioSummaryListener = (startListening: AppStartListening) => {
   startListening({

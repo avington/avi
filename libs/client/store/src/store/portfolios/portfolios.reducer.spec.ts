@@ -1,13 +1,13 @@
 import { Portfolio } from '@avi/global/models';
 import { configureStore } from '@reduxjs/toolkit';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { RootState } from './index';
+import { RootState } from '../index';
 import portfoliosReducer, { loadPortfolioAction } from './portfolios.reducer';
 
 vi.mock('../data/portfolio.data');
 vi.mock('@avi/global/services');
 
-const mockPortfolio: Portfolio = { id: '1', name: 'Test Portfolio', email: 'test@email.com' };
+const mockPortfolio: Portfolio = { id: '1', name: 'Test Portfolio', user: 'test@email.com' };
 
 describe('portfoliosSlice', () => {
   let store: ReturnType<typeof configureStore>;

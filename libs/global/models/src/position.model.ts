@@ -1,12 +1,15 @@
 import { Lot } from './lot.model';
 
 export interface Position {
+  costBasis: number;
+  marketValue: number;
   id?: string;
   user: string;
   portfolioId: string;
   symbol: string;
   name?: string;
   price?: number;
+  shares?: number;
   changesPercentage?: number;
   change?: number;
   dayLow?: number;

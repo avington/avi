@@ -1,5 +1,15 @@
-import { Express } from 'express';
+import { Router } from 'express';
+import {
+  deletePositionHandler,
+  getPosition,
+  getPositions,
+  insertPositionHandler,
+  patchPositionHandler,
+} from '../controllers/positions.controller';
 
-export const addPositionsRoutes = (app: Express) => {
-  console.log('Adding positions routes');
-};
+const positionsRouter: Router = Router();
+
+positionsRouter.route('/').get(getPositions).post(insertPositionHandler);
+positionsRouter.route('/:id').get(getPosition).patch(patchPositionHandler).delete(deletePositionHandler);
+
+export { positionsRouter };

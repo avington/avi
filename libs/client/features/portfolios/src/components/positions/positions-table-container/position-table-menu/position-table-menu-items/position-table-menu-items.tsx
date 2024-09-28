@@ -10,7 +10,7 @@ export function PositionTableMenuItems() {
     <div className={styles['container']}>
       <div className={styles['item']}>
         <PositionTableMenuItemsButton
-          active={context?.tabState === 'holdings'}
+          $active={context?.tabState === 'holdings'}
           onClick={() => context?.setTabState('holdings')}
         >
           Holdings
@@ -18,7 +18,7 @@ export function PositionTableMenuItems() {
       </div>
       <div className={styles['item']}>
         <PositionTableMenuItemsButton
-          active={context?.tabState === 'fundamentals'}
+          $active={context?.tabState === 'fundamentals'}
           onClick={() => context?.setTabState('fundamentals')}
         >
           Fundamentals
@@ -26,7 +26,7 @@ export function PositionTableMenuItems() {
       </div>
       <div className={styles['item']}>
         <PositionTableMenuItemsButton
-          active={context?.tabState === 'performance'}
+          $active={context?.tabState === 'performance'}
           onClick={() => context?.setTabState('performance')}
         >
           Performance

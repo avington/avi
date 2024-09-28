@@ -27,8 +27,8 @@
       "@avi/global/services": ["libs/global/services/src/index.ts"],
       "@avi/serer/database": ["libs/server/database/src/index.ts"],
       "@avi/server/auth": ["libs/server/auth/src/index.ts"],
-      "@avi/server/features/holdings": ["libs/server/features/holdings/src/index.ts"],
-      "@avi/server/features/portfolios": ["libs/server/features/portfolios/src/index.ts"]
+      "@avi/server/features/portfolios": ["libs/server/features/portfolios/src/index.ts"],
+      "@avi/server/features/users": ["libs/server/features/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

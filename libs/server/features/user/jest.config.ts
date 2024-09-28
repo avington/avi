@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'server-holdings',
+  displayName: 'server-users',
   preset: '../../../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/server/features/holdings',
+  coverageDirectory: '../../../../coverage/libs/server/features/user',
 };

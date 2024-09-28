@@ -1,7 +1,7 @@
 import { LoadingStatusType, Portfolio } from '@avi/global/models';
 import { serializeError } from '@avi/global/services';
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import { addPortfolio, fetchPortfolios, patchPortfolio } from '../data/portfolio.data';
+import { addPortfolio, fetchPortfolios, patchPortfolio } from '../../data/portfolio.data';
 
 export interface PortfoliosState {
   portfolios: Portfolio[] | null;

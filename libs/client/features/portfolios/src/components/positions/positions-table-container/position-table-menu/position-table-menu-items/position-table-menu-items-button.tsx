@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
-  active?: boolean;
+  $active?: boolean;
 }
 
 const PositionViewButton = styled.button<ButtonProps>`
   border: none;
-  background-color: ${(props) => (props.active ? 'var(--material-color-light-blue-100)' : 'transparent')};
+  background-color: ${(props) => (props.$active ? 'var(--material-color-light-blue-100)' : 'transparent')};
   text-decoration: none;
   border-radius: 0.5rem;
   cursor: pointer;

@@ -8,7 +8,7 @@ export interface PortfolioSummaryState {
   unrealizedGains: number;
 }
 
-export const initialState: PortfolioSummaryState = {
+export const initialPortfolioSummaryState: PortfolioSummaryState = {
   totalSymbols: 0,
   totalMarketValue: 0,
   cashHoldings: 0,
@@ -18,7 +18,7 @@ export const initialState: PortfolioSummaryState = {
 
 export const portfolioSummarySlice = createSlice({
   name: 'portfolioSummary',
-  initialState,
+  initialState: initialPortfolioSummaryState,
   reducers: {
     setPortfolioSummary: (state, action: PayloadAction<PortfolioSummaryState>) => {
       return {
