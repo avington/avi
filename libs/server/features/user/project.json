@@ -1,0 +1,19 @@
+{
+  "name": "server-users",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/server/features/user/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/server/features/user",
+        "main": "libs/server/features/user/src/index.ts",
+        "tsConfig": "libs/server/features/user/tsconfig.lib.json",
+        "assets": ["libs/server/features/user/*.md"]
+      }
+    }
+  }
+}

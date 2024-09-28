@@ -1,7 +1,7 @@
 import { LoadingStatusType, Position } from '@avi/global/models';
 import { serializeError } from '@avi/global/services';
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import { fetchPositions } from '../data/positions.data';
+import { fetchPositions } from '../../data/positions.data';
 
 export interface PositionState {
   positions: Position[] | null;
@@ -31,7 +31,13 @@ export const getPositionsAction = createAsyncThunk<Position[], { portfolioId: st
 export const positionsSlice = createSlice({
   name: 'positions',
   initialState: initialPositionsState,
-  reducers: {},
+  reducers: {
+    resetPositionsAction: (state) => {
+      return {
+        ...initialPositionsState,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPositionsAction.pending, (state) => {
       return {
@@ -58,3 +64,4 @@ export const positionsSlice = createSlice({
 });
 
 export default positionsSlice.reducer;
+export const { resetPositionsAction } = positionsSlice.actions;

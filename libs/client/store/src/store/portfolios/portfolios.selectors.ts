@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '.';
+import { RootState } from '..';
 
 export const selectPortfolios = createSelector(
   (root: RootState) => root.portfolios,

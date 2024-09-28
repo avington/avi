@@ -1,5 +1,5 @@
 import { connectToDatabase } from '@avi/serer/database';
-import { portfolioRouter } from '@avi/server/features/portfolios';
+import { portfolioRouter, positionsRouter } from '@avi/server/features/portfolios';
 import cors from 'cors';
 import express from 'express';
 import * as path from 'path';
@@ -30,6 +30,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Middleware to handle all the routes
 app.use('/api/v1/portfolios', portfolioRouter);
+app.use('/api/v1/positions', positionsRouter);
 
 // connect to mongo
 const db = async () => await connectToDatabase();

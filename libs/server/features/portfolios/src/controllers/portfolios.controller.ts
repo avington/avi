@@ -15,6 +15,21 @@ export const getPortfolios = async (req: Request, res: Response) => {
   );
 };
 
+export const getPortfolio = async (req: Request, res: Response) => {
+  const user = process.env['NX_PUBLIC_DEV_USER'] ?? 'anonymous';
+  const id = req.params['id'] as string;
+
+  const portfolio = await portfolioSchema.findOne({ user, _id: id });
+  if (portfolio) {
+    res.status(StatusCodes.OK).json({
+      ...portfolio.toObject(),
+      id: portfolio._id,
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: 'Portfolio not found' });
+  }
+};
+
 export const insertPortfolioHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
 
@@ -48,13 +63,25 @@ export const patchPortfolioHandler = async (req: Request, res: Response) => {
     });
 
     if (result) {
-      res.status(200).json({ id: result.id });
+      res.status(StatusCodes.OK).json({ id: result.id });
     } else {
-      res.status(404).json({ error: 'Portfolio not found' });
+      res.status(StatusCodes.NOT_FOUND).json({ error: 'Portfolio not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(501).json({ error: 'Internal server error' });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+  }
+};
+
+export const deletePortfolioHandler = async (req: Request, res: Response) => {
+  const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
+  const id = req.params['id'] as string;
+
+  const result = await portfolioSchema.findOneAndDelete({ user, _id: id });
+  if (result) {
+    res.status(StatusCodes.OK).json({ id: result.id });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({ error: 'Portfolio not found' });
   }
 };
 
