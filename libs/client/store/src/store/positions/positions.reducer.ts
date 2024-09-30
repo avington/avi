@@ -1,7 +1,7 @@
 import { LoadingStatusType, Position } from '@avi/global/models';
 import { serializeError } from '@avi/global/services';
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import { fetchPositions } from '../../data/positions.data';
+import { addPosition, fetchPositionsByPortfolio } from '../../data/positions.data';
 
 export interface PositionState {
   positions: Position[] | null;
@@ -19,7 +19,26 @@ export const getPositionsAction = createAsyncThunk<Position[], { portfolioId: st
   'positions/getPositions',
   async ({ portfolioId }, { rejectWithValue }) => {
     try {
-      const response = await fetchPositions(portfolioId);
+      const response = await fetchPositionsByPortfolio(portfolioId);
+      return response.data;
+    } catch (error) {
+      const SerializedError = serializeError(error as Error);
+      return rejectWithValue(SerializedError);
+    }
+  }
+);
+
+export const insertPositionAction = createAsyncThunk<Position, { symbol: string; portfolioId: string }>(
+  'positions/insertPosition',
+  async ({ symbol, portfolioId }, { rejectWithValue }) => {
+    const position: Position = {
+      symbol,
+      portfolioId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    try {
+      const response = await addPosition(position);
       return response.data;
     } catch (error) {
       const SerializedError = serializeError(error as Error);

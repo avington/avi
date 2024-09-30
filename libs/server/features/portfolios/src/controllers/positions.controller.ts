@@ -2,11 +2,26 @@ import { StatusCodes } from 'http-status-codes';
 import { Request, Response } from 'express';
 import positionSchema from '../schemas/positions.schema';
 import { getFullQuote } from '../services/fmp/full-quote.service';
+import portfolioSchema from '../schemas/portfolio.schema';
+import { Position } from '@avi/global/models';
 
 export const getPositions = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? 'anonymous';
 
   const positions = await positionSchema.find({ user });
+  res.status(StatusCodes.OK).json(
+    positions.map((position) => ({
+      ...position.toObject(),
+      id: position._id,
+    }))
+  );
+};
+
+export const getPositionsByPortfolio = async (req: Request, res: Response) => {
+  const user = process.env['NX_PUBLIC_DEV_USER'] ?? 'anonymous';
+  const portfolioId = req.params['portfolioId'] as string;
+
+  const positions = await positionSchema.find({ user, portfolioId });
   res.status(StatusCodes.OK).json(
     positions.map((position) => ({
       ...position.toObject(),
@@ -33,14 +48,26 @@ export const getPosition = async (req: Request, res: Response) => {
 export const insertPositionHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
 
-  const quote = await getFullQuote(req.body.symbol);
-  const newPosition = {
+  // check if the portfolio exists
+  const portfolio = await portfolioSchema.findById(req.body.portfolioId);
+  if (!portfolio) {
+    res.status(StatusCodes.NOT_FOUND).json({ error: 'Portfolio not found' });
+    return;
+  }
+
+  // get the full quote from 3rd party API
+  const [quote] = await getFullQuote(req.body.symbol);
+  console.log('quote', quote);
+  const newPosition: Position = {
+    ...req.body,
     ...quote,
     user: user,
-    price: quote.price,
+    isActive: true,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
+
+  console.log('newPosition', newPosition);
 
   const position = await positionSchema.create(newPosition);
   res.status(StatusCodes.CREATED).json({
