@@ -6,7 +6,7 @@ interface ButtonProps {
 
 const PositionViewButton = styled.button<ButtonProps>`
   border: none;
-  background-color: ${(props) => (props.$active ? 'var(--material-color-light-blue-100)' : 'transparent')};
+  background-color: ${(props) => (props.$active ? 'var(--material-color-brown-50)' : 'transparent')};
   text-decoration: none;
   border-radius: 0.5rem;
   cursor: pointer;

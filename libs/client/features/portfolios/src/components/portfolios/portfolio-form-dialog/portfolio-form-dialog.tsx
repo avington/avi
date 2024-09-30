@@ -17,11 +17,7 @@ const validationSchema = yup.object().shape({
 
 export function PortfolioFormDialog({ isOpen, onClose, portfolio, onUpdate }: PortfolioFormDialogProps) {
   return (
-    <CommonDialog
-      closeDialog={onClose}
-      dialogTitle={portfolio ? 'Update Portfolio' : 'Close Portfolio'}
-      isOpen={isOpen}
-    >
+    <CommonDialog closeDialog={onClose} dialogTitle={portfolio ? 'Update Portfolio' : 'Add Portfolio'} isOpen={isOpen}>
       <Formik
         initialValues={{
           name: portfolio?.name || '',
