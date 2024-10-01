@@ -17,8 +17,18 @@ const TableRow = styled.tr`
   }
 `;
 
-const TableCell = styled.td`
+interface TableCellProps {
+  profitLoss?: number;
+}
+
+const TableCell = styled.td<TableCellProps>`
   padding: 8px;
+  color: ${({ profitLoss }) =>
+    profitLoss && profitLoss > 0
+      ? 'var(--material-color-green-800)'
+      : profitLoss && profitLoss < 0
+      ? 'var(--material-color-red-800)'
+      : 'inherit'};
 `;
 
 const StyledTable: React.FC = () => {

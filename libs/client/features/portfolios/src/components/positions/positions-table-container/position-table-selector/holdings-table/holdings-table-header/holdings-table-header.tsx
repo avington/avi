@@ -6,6 +6,7 @@ export function HoldingsTableHeader() {
     <thead>
       <TableRow>
         <TableHeader>Symbol</TableHeader>
+        <TableHeader></TableHeader>
         <TableHeader>Name</TableHeader>
         <TableHeader>Shares</TableHeader>
         <TableHeader>Price</TableHeader>
