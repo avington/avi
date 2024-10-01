@@ -10,7 +10,7 @@ type Handler = (event: MouseEvent) => void;
  * @param handler
  * @param mouseEvent
  */
-function useOnClickOutside<T extends HTMLElement = HTMLElement>(
+export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
   handler: Handler,
   mouseEvent: 'mousedown' | 'mouseup' = 'mousedown'
