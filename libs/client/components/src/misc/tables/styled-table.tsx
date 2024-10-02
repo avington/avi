@@ -18,15 +18,15 @@ const TableRow = styled.tr`
 `;
 
 interface TableCellProps {
-  profitLoss?: number;
+  $profitLoss?: number;
 }
 
 const TableCell = styled.td<TableCellProps>`
   padding: 8px;
-  color: ${({ profitLoss }) =>
-    profitLoss && profitLoss > 0
+  color: ${({ $profitLoss }) =>
+    $profitLoss && $profitLoss > 0
       ? 'var(--material-color-green-800)'
-      : profitLoss && profitLoss < 0
+      : $profitLoss && $profitLoss < 0
       ? 'var(--material-color-red-800)'
       : 'inherit'};
 `;

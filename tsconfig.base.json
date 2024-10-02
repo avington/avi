@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@avi/client-auth": ["libs/client/auth/src/index.ts"],
       "@avi/client-components": ["libs/client/components/src/index.ts"],
       "@avi/client-hooks": ["libs/client/hooks/src/index.ts"],
       "@avi/client-store": ["libs/client/store/src/index.ts"],
@@ -26,7 +25,6 @@
       "@avi/global/models": ["libs/global/models/src/index.ts"],
       "@avi/global/services": ["libs/global/services/src/index.ts"],
       "@avi/serer/database": ["libs/server/database/src/index.ts"],
-      "@avi/server/auth": ["libs/server/auth/src/index.ts"],
       "@avi/server/features/portfolios": ["libs/server/features/portfolios/src/index.ts"],
       "@avi/server/features/users": ["libs/server/features/user/src/index.ts"]
     }

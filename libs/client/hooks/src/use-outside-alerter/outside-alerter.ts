@@ -9,46 +9,31 @@ export interface UseOutsideAlerterRequest {
   /**
    * @description Container to compare if outside of.
    */
-  refListContainer: MutableRefObject<null>;
+  refListContainer: MutableRefObject<HTMLDivElement | null>;
   /**
    * @description Optional reference to button to exclude
    */
-  refButton?: MutableRefObject<null>;
+  refButton?: MutableRefObject<HTMLButtonElement | null>;
 }
 
-export function useOutsideAlerter(request: UseOutsideAlerterRequest): void {
+export function useOutsideAlerter({ refButton, refListContainer, outsideClicked }: UseOutsideAlerterRequest): void {
   useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
     function handleClickOutside(event: MouseEvent) {
-      // get the current list container reference
-      const currentListContainer = request.refListContainer.current as unknown as {
-        contains: (tgt: EventTarget | null) => boolean;
-      };
-
-      // get the current button container reference if it exists
-      const currentButtonContainer = request?.refButton?.current as unknown as
-        | { contains: (tgt: EventTarget | null) => boolean }
-        | undefined;
-
-      const isInsideListContainer = currentListContainer && currentListContainer.contains(event.target);
-      const isInsideButtonContainer = currentButtonContainer && currentButtonContainer.contains(event.target);
-
-      setTimeout(() => {
-        if (!isInsideListContainer && !isInsideButtonContainer) {
-          request.outsideClicked();
-        }
-      }, 100);
+      if (
+        refButton?.current &&
+        !refButton.current.contains(event.target as Node) &&
+        refListContainer.current &&
+        !refListContainer.current.contains(event.target as Node)
+      ) {
+        outsideClicked();
+      }
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside);
 
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [request]);
+  }, [refButton, refListContainer, outsideClicked]);
 }
 
 export default useOutsideAlerter;
