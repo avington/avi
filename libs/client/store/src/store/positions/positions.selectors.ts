@@ -11,6 +11,11 @@ export const selectPositions = createSelector(
   (positions) => positions?.positions
 );
 
+export const selectPositionsDictionary = createSelector(
+  (root: RootState) => root.positions,
+  (positions) => positions?.positionsDictionary
+);
+
 export const selectPositionsError = createSelector(
   (root: RootState) => root.positions,
   (positions) => positions?.error

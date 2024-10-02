@@ -5,12 +5,14 @@ import { addPosition, fetchPositionsByPortfolio } from '../../data/positions.dat
 
 export interface PositionState {
   positions: Position[] | null;
+  positionsDictionary: { [id: string]: Position } | null;
   loadingStatus: LoadingStatusType;
   error: SerializedError | null | undefined;
 }
 
 export const initialPositionsState: PositionState = {
   positions: null,
+  positionsDictionary: null,
   loadingStatus: 'idle',
   error: null,
 };
@@ -65,10 +67,15 @@ export const positionsSlice = createSlice({
       };
     });
     builder.addCase(getPositionsAction.fulfilled, (state, action) => {
+      const positionsDictionary = action.payload.reduce((acc, position) => {
+        acc[position.symbol] = position;
+        return acc;
+      }, {} as { [id: string]: Position });
       return {
         ...state,
         loadingStatus: 'succeeded',
         positions: action.payload,
+        positionsDictionary,
         error: null,
       };
     });
