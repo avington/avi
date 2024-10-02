@@ -1,7 +1,6 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.action-row {
+    display: flex;
+    justify-content: end;
+    width: 1280px;
+    gap: 2rem;
+}

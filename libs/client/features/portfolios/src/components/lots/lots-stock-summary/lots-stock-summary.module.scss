@@ -1,7 +1,43 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+        'symbol name name name'
+        'price change unrealized realized' 
+        'total . market .';
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    width: 1280px;
+}
+
+.symbol {
+    grid-area: symbol;
+}
+
+.name {
+    grid-area: name;
+}
+
+.price {
+    grid-area: price;
+}
+
+.day-change {
+    grid-area: change;
+}
+
+.unrealized {
+    grid-area: unrealized;
+}
+
+.realized {
+    grid-area: realized;
+}
+
+.total {
+    grid-area: total;
+}
+
+.market {
+    grid-area: market;
+}

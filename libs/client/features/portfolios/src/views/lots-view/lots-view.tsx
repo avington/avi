@@ -12,7 +12,7 @@ export function LotsView() {
           <LotsStockSummary />
         </div>
         <div>
-          <LotsStockActionRow />{' '}
+          <LotsStockActionRow />
         </div>
         <div>
           <LotsStockTable />
