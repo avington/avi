@@ -13,8 +13,8 @@ export interface Lot {
   price?: number;
   marketValue?: number;
   holdingPeriod: 'Long Term' | 'Short Term';
-  gainsLoss: number;
-  gainsLossPercentage: number;
+  gainsLosses: number;
+  gainsLossesPercentage: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

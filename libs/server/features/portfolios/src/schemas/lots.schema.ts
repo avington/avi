@@ -12,6 +12,12 @@ export const lotsSchema = new Schema<Lot>({
   price: { type: Number, required: false },
   createdAt: { type: Date, required: true },
   updatedAt: { type: Date, required: false },
+  openDate: { type: Date, required: false },
+  costPerShare: { type: Number, required: false },
+  gainsLosses: { type: Number, required: false },
+  gainsLossesPercentage: { type: Number, required: false },
+  marketValue: { type: Number, required: false },
+  holdingPeriod: { type: String, required: false },
 });
 
 export default mongoose.model<Lot>('Lot', lotsSchema);
