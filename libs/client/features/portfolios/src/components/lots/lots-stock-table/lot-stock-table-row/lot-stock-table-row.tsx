@@ -22,8 +22,8 @@ export function LotStockTableRow({ lot }: LotStockTableRowProps) {
       <TableCell>{formatCurrency(lot?.costPerShare ?? 0)}</TableCell>
       <TableCell>{formatCurrency(lot?.marketValue ?? 0)}</TableCell>
       <TableCell>{formatCurrency(lot?.costBasis ?? 0)}</TableCell>
-      <TableCell $profitLoss={lot?.gainsLoss ?? 0}>
-        {formatCurrencyAndPercentage(lot?.gainsLoss ?? 0, lot?.gainsLossPercentage ?? 0)}
+      <TableCell $profitLoss={lot?.gainsLosses ?? 0}>
+        {formatCurrencyAndPercentage(lot?.gainsLosses ?? 0, lot?.gainsLossesPercentage ?? 0)}
       </TableCell>
       <TableCell>{lot?.holdingPeriod}</TableCell>
     </TableRow>

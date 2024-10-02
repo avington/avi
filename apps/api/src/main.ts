@@ -1,12 +1,11 @@
 import { connectToDatabase } from '@avi/serer/database';
-import { portfolioRouter, positionsRouter } from '@avi/server/features/portfolios';
+import { portfolioRouter, positionsRouter, lotsRouter } from '@avi/server/features/portfolios';
 import cors from 'cors';
 import express from 'express';
 import * as path from 'path';
 import morgan from 'morgan';
 
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
-const user = process.env.NX_PUBLIC_DEV_USER;
 
 const app = express();
 
@@ -31,6 +30,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 // Middleware to handle all the routes
 app.use('/api/v1/portfolios', portfolioRouter);
 app.use('/api/v1/positions', positionsRouter);
+app.use('/api/v1/lots', lotsRouter);
 
 // connect to mongo
 const db = async () => await connectToDatabase();
