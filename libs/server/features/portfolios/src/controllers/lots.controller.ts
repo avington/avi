@@ -3,7 +3,20 @@ import lotsSchema from '../schemas/lots.schema';
 import { StatusCodes } from 'http-status-codes';
 import positionsSchema from '../schemas/positions.schema';
 
-export const getLots = async (req: Request, res: Response) => {
+export const getLotsByPortfolioId = async (req: Request, res: Response) => {
+  const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
+  const portfolioId = req.params['portfolioId'] as string;
+
+  try {
+    const lots = await lotsSchema.find({ user, portfolioId });
+    res.status(StatusCodes.OK).json(lots ?? []);
+  } catch (error) {
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+  }
+};
+
+export const getLotsByStockSymbol = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
   const portfolioId = req.params['portfolioId'] as string;
   const symbol = req.params['symbol'] as string;

@@ -4,6 +4,7 @@ export interface Lot {
   openDate: Date;
   id?: string;
   stockId: string;
+  symbol: string;
   portfolioId: string;
   user: string;
   transactionType: TransactionType;
