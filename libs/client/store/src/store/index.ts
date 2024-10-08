@@ -5,12 +5,14 @@ import { addPortfolioSummaryListener } from './portfolios-summary/portfolios-sum
 import portfoliosReducer from './portfolios/portfolios.reducer';
 import portfoliosSummaryReducer from './portfolios-summary/portfolios-summary.reducer';
 import positionsReducer from './positions/positions.reducer';
+import lotsReducer from './lots/lots.reducer';
 
 const reducer = {
   auth: authReducer,
   portfolios: portfoliosReducer,
   portFoliosSummary: portfoliosSummaryReducer,
   positions: positionsReducer,
+  lots: lotsReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();

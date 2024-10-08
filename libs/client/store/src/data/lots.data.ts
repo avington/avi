@@ -1,9 +1,14 @@
 import { Lot } from '@avi/global/models';
 import axios from 'axios';
 
+export const fetchLotsByPortfolioId = async (portfolioId: string) => {
+  const baseUrl = process.env.VITE_API_URL || '';
+  return axios.get<Lot[]>(baseUrl + '/lots/' + portfolioId);
+};
+
 export const fetchLotsBySymbolPortfolioId = async (symbol: string, portfolioId: string) => {
   const baseUrl = process.env.VITE_API_URL || '';
-  return axios.get<Lot[]>(baseUrl + '/lots/' + portfolioId + '/' + symbol);
+  return axios.get<Lot[]>(baseUrl + '/lots/' + portfolioId + '/stock/' + symbol);
 };
 
 export const addLot = async (lot: Lot) => {

@@ -1,10 +1,17 @@
 import { Router } from 'express';
-import { deleteLotHandler, getLots, patchLotHandler, postLotHandler } from '../controllers/lots.controller';
+import {
+  deleteLotHandler,
+  getLotsByPortfolioId,
+  getLotsByStockSymbol,
+  patchLotHandler,
+  postLotHandler,
+} from '../controllers/lots.controller';
 
-const lotsRouter = Router();
+const lotsRouter: Router = Router();
 
 lotsRouter.route('/').post(postLotHandler);
-lotsRouter.route('/:symbol/:portfolioId').get(getLots);
+lotsRouter.route('/:portfolioId').get(getLotsByPortfolioId);
+lotsRouter.route('/:portfolioId/stock/:symbol').get(getLotsByStockSymbol);
 lotsRouter.route('/:id').patch(patchLotHandler).delete(deleteLotHandler);
 
 export { lotsRouter };
