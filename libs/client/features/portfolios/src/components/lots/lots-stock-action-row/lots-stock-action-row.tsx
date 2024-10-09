@@ -1,6 +1,6 @@
 import { CommonButton, LargePanel } from '@avi/client-components';
 import styles from './lots-stock-action-row.module.scss';
-import LotFormDialog from './lot-form-dialog/lot-form-dialog';
+import { LotFormDialog } from './lot-form-dialog/lot-form-dialog';
 import { useBoolean } from '@avi/client-hooks';
 
 export function LotsStockActionRow() {

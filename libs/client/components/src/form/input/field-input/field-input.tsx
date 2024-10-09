@@ -14,7 +14,9 @@ export function FieldInput({ name, disabled, required = false, type = 'text', ha
   const { handleBlur, handleChange } = useFormikContext();
   const [field] = useField({ name, type, required, disabled, onBlur: handleBlur, onChange: handleChange });
 
-  return <StyledInput {...field} id={field.name} style={hasError ? { border: 'var(--error-border)' } : {}} />;
+  return (
+    <StyledInput {...field} id={field.name} style={hasError ? { border: 'var(--error-border)' } : {}} type={type} />
+  );
 }
 
 export default FieldInput;

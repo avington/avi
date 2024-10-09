@@ -1,7 +1,7 @@
 export type TransactionType = 'BUY' | 'SELL';
 
 export interface Lot {
-  openDate: Date;
+  openDate: Date | string;
   id?: string;
   stockId: string;
   symbol: string;
