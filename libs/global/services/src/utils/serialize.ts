@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const serializeError = (error: Error | AxiosResponse<unknown, any> | undefined) => {
+export const serializeError = (error: Error | AxiosResponse<unknown, any> | unknown | undefined) => {
   // if undefined then there was no error
   if (!error) {
     return undefined;

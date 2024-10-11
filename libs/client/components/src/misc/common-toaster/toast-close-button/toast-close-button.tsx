@@ -23,7 +23,7 @@ export function ToastCloseButton({ onClose, closeIconText }: ToastCloseButtonPro
         fontSize="medium"
         aria-hidden="true"
         role="presentation"
-        style={{ color: 'white', border: 'none', boxShadow: 'none' }}
+        style={{ color: 'var(--material-color-blue-grey-800)', border: 'none', boxShadow: 'none' }}
       />
     </button>
   );

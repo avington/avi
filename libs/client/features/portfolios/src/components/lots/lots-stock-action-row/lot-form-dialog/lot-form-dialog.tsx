@@ -13,7 +13,13 @@ import { ErrorMessage, Formik, FormikProps } from 'formik';
 import { noop } from 'lodash-es';
 import * as yup from 'yup';
 import styles from './lot-form-dialog.module.scss';
-import { addNewLotAction, selectLotsLoadingStatus, useAppDispatch, useAppSelector } from '@avi/client-store';
+import {
+  addNewLotAction,
+  selectLotsError,
+  selectLotsLoadingStatus,
+  useAppDispatch,
+  useAppSelector,
+} from '@avi/client-store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useBoolean } from '@avi/client-hooks';
@@ -33,10 +39,16 @@ const validationSchema = yup.object().shape({
 export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
   const dispatch = useAppDispatch();
   const loadingStatus = useAppSelector(selectLotsLoadingStatus);
+  const errorMessage = useAppSelector(selectLotsError);
   const { setFalse: setErrorFalse, setTrue: setErrorTrue, value: isErrorOpen } = useBoolean(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { portfolioId, symbol } = useParams<{ portfolioId: string; symbol: string }>();
+
+  useEffect(() => {
+    if (errorMessage) {
+      setErrorTrue();
+    }
+  }, [errorMessage, setErrorTrue]);
 
   const onSubmit = useCallback(
     (
@@ -63,18 +75,13 @@ export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
         .then(() => {
           formik.resetForm();
           onClose();
-        })
-        .catch((err) => {
-          console.error(err);
-          setErrorMessage(err.message);
-          setErrorTrue();
         });
     },
-    [lot?.id, lot?.createdAt, portfolioId, symbol, dispatch, onClose, setErrorTrue]
+    [lot?.id, lot?.createdAt, portfolioId, symbol, dispatch, onClose]
   );
 
   useEffect(() => {
-    if (loadingStatus === 'success') {
+    if (loadingStatus === 'succeeded') {
       onClose();
     }
   }, [loadingStatus, onClose]);
@@ -85,7 +92,7 @@ export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
         closeIconText="close"
         theme="error"
         isVisible={isErrorOpen}
-        message={errorMessage}
+        message={errorMessage?.message ?? 'There was an error'}
         onClose={setErrorFalse}
       />
       <Formik
