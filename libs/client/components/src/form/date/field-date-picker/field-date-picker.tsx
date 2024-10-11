@@ -1,6 +1,5 @@
-import { useField, useFormikContext } from 'formik';
-import styles from './field-date-picker.module.scss';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useField, useFormikContext } from 'formik';
 import React from 'react';
 
 export interface FieldDatePickerProps {

@@ -1,6 +1,7 @@
 import { Lot } from '@avi/global/models';
 import styles from './lot-stock-table-row.module.scss';
 import { TableCell, TableRow } from '@avi/client-components';
+import { format, FormatOptions } from 'date-fns';
 import {
   formatCurrency,
   formatCurrencyAndPercentage,
@@ -14,9 +15,11 @@ export interface LotStockTableRowProps {
 
 export function LotStockTableRow({ lot }: LotStockTableRowProps) {
   console.log('LotStockTableRow', lot);
+
+  const formatOptions: FormatOptions = {};
   return (
     <TableRow key={lot.id} className={styles.row}>
-      <TableCell>{formatDateAsDayMonthYear(lot?.openDate ?? '')}</TableCell>
+      <TableCell>{format(lot.openDate, 'MM/dd/yyyy')}</TableCell>
       <TableCell>{formatNumber(lot?.shares ?? 0)}</TableCell>
       <TableCell>{formatCurrency(lot?.price ?? 0)}</TableCell>
       <TableCell>{formatCurrency(lot?.costPerShare ?? 0)}</TableCell>

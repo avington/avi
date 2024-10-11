@@ -4,7 +4,7 @@ import FieldDatePicker from './field-date-picker';
 
 describe('FieldDatePicker', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<FieldDatePicker />);
+    const { baseElement } = render(<FieldDatePicker name="name" />);
     expect(baseElement).toBeTruthy();
   });
 });

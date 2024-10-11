@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledDropdown = styled.select`
-  border: 2px solid var(--material-color-light-blue-200);
+  border: 1px solid var(--material-color-grey-400);
   font-size: 1.2rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   padding: 0.5rem;
   margin: 0.5rem;
   background-color: white;
