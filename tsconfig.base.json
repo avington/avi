@@ -26,7 +26,8 @@
       "@avi/global/services": ["libs/global/services/src/index.ts"],
       "@avi/serer/database": ["libs/server/database/src/index.ts"],
       "@avi/server/features/portfolios": ["libs/server/features/portfolios/src/index.ts"],
-      "@avi/server/features/users": ["libs/server/features/user/src/index.ts"]
+      "@avi/server/features/users": ["libs/server/features/user/src/index.ts"],
+      "@avi/server/middleware": ["libs/server/middleware/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

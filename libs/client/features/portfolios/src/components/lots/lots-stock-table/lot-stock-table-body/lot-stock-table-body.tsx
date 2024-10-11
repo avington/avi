@@ -35,9 +35,11 @@ export function LotStockTableBody() {
           </TableRow>
         </RenderWhen.If>{' '}
         <RenderWhen.If isTrue={loadingStatus !== 'loading' && !!lots}>
-          {lots?.map((lot) => (
-            <LotStockTableRow key={lot.id} lot={lot} />
-          ))}
+          {(lots ?? [])
+            .filter((f) => f.portfolioId === portfolioId && f.symbol === symbol)
+            .map((lot) => (
+              <LotStockTableRow key={lot.id} lot={lot} />
+            ))}
         </RenderWhen.If>
         <RenderWhen.If isTrue={loadingStatus !== 'loading' && !lots?.length}>
           <TableRow>

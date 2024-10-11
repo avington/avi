@@ -1,5 +1,5 @@
 import { LoadingStatusType, Lot } from '@avi/global/models';
-import { fetchLotsBySymbolPortfolioId } from '../../data/lots.data';
+import { addLot, fetchLotsBySymbolPortfolioId } from '../../data/lots.data';
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
 
 export interface LotState {
@@ -33,12 +33,27 @@ export const getLotsAction = createAsyncThunk<Lot[], { portfolioId: string | und
   }
 );
 
+export const addNewLotAction = createAsyncThunk<Lot, Lot>('lots/addNewLot', async (lot, { rejectWithValue }) => {
+  try {
+    // If either portfolioId or symbol is not provided, return an empty array
+    if (!lot.portfolioId || !lot.symbol) {
+      return rejectWithValue(new Error('Portfolio ID and Symbol are required'));
+    }
+
+    const response = await addLot(lot);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error as Error);
+  }
+});
+
 export const lotsSlice = createSlice({
   name: 'lots',
   initialState: initialLotsState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Add the getLotsAction
       .addCase(getLotsAction.pending, (state) => {
         return { ...state, loadingStatus: 'loading' };
       })
@@ -52,6 +67,16 @@ export const lotsSlice = createSlice({
       .addCase(getLotsAction.rejected, (state, action) => {
         state.loadingStatus = 'idle';
         state.error = action?.error;
+      })
+      // Add the addNewLotAction
+      .addCase(addNewLotAction.pending, (state) => {
+        return { ...state, loadingStatus: 'loading' };
+      })
+      .addCase(addNewLotAction.fulfilled, (state, action) => {
+        return { ...state, loadingStatus: 'succeeded', lots: [...(state.lots ?? []), action.payload] };
+      })
+      .addCase(addNewLotAction.rejected, (state, action) => {
+        return { ...state, loadingStatus: 'failed', error: action?.error };
       });
   },
 });

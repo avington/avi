@@ -1,6 +1,7 @@
 import {
   CommonButton,
   CommonDialog,
+  CommonToaster,
   DisplayFormikState,
   FieldInput,
   FieldSelect,
@@ -12,7 +13,10 @@ import { ErrorMessage, Formik, FormikProps } from 'formik';
 import { noop } from 'lodash-es';
 import * as yup from 'yup';
 import styles from './lot-form-dialog.module.scss';
-
+import { addNewLotAction, selectLotsLoadingStatus, useAppDispatch, useAppSelector } from '@avi/client-store';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useBoolean } from '@avi/client-hooks';
 export interface LotFormDialogProps {
   isOpen: boolean;
   onClose: () => void;
@@ -27,19 +31,63 @@ const validationSchema = yup.object().shape({
 });
 
 export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
-  const onSubmit = (
-    formik: FormikProps<{
-      openDate: string;
-      shares: number;
-      costPerShare: number;
-      transactionType: TransactionType;
-    }>
-  ) => {
-    console.log('formik', formik.values);
-    onClose();
-  };
+  const dispatch = useAppDispatch();
+  const loadingStatus = useAppSelector(selectLotsLoadingStatus);
+  const { setFalse: setErrorFalse, setTrue: setErrorTrue, value: isErrorOpen } = useBoolean(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const { portfolioId, symbol } = useParams<{ portfolioId: string; symbol: string }>();
+
+  const onSubmit = useCallback(
+    (
+      formik: FormikProps<{
+        openDate: string;
+        shares: number;
+        costPerShare: number;
+        transactionType: TransactionType;
+      }>
+    ) => {
+      const newLot: Lot = {
+        id: lot?.id,
+        portfolioId: portfolioId ?? '',
+        symbol: symbol ?? '',
+        openDate: formik.values.openDate,
+        shares: formik.values.shares,
+        costPerShare: formik.values.costPerShare,
+        transactionType: formik.values.transactionType,
+        createdAt: lot?.createdAt,
+      };
+
+      dispatch(addNewLotAction(newLot))
+        .unwrap()
+        .then(() => {
+          formik.resetForm();
+          onClose();
+        })
+        .catch((err) => {
+          console.error(err);
+          setErrorMessage(err.message);
+          setErrorTrue();
+        });
+    },
+    [lot?.id, lot?.createdAt, portfolioId, symbol, dispatch, onClose, setErrorTrue]
+  );
+
+  useEffect(() => {
+    if (loadingStatus === 'success') {
+      onClose();
+    }
+  }, [loadingStatus, onClose]);
+
   return (
     <CommonDialog closeDialog={onClose} dialogTitle={lot?.id ? 'Update Lot' : 'Add Lot'} isOpen={isOpen}>
+      <CommonToaster
+        closeIconText="close"
+        theme="error"
+        isVisible={isErrorOpen}
+        message={errorMessage}
+        onClose={setErrorFalse}
+      />
       <Formik
         initialValues={{
           openDate: format(lot?.openDate ?? new Date(), 'yyyy-MM-dd') || format(new Date(), 'yyyy-MM-dd'),
@@ -54,6 +102,13 @@ export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
           const { touched, errors, isValid } = formik;
           return (
             <form>
+              <div className="form-field">
+                <label htmlFor="transactionType">Transaction Type</label>
+                <FieldSelect name="transactionType" required={true}>
+                  <StyledOption value="BUY">Buy</StyledOption>
+                  <StyledOption value="SELL">Sell</StyledOption>
+                </FieldSelect>
+              </div>
               <div className="form-field">
                 <label htmlFor="openDate">Open Date</label>
                 <FieldInput
@@ -84,14 +139,7 @@ export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
                 />
                 <ErrorMessage name="costPerShare" component="div" className="error-message" />
               </div>
-              <div className="form-field">
-                <label htmlFor="transactionType">Transaction Type</label>
-                <FieldSelect name="transactionType" required={true}>
-                  <StyledOption value="BUY">Buy</StyledOption>
-                  <StyledOption value="SELL">Sell</StyledOption>
-                </FieldSelect>
-              </div>
-              <div className={styles['form-actions']}>
+              <div className="form-actions">
                 <CommonButton
                   backgroundColor="green"
                   type="button"
@@ -103,9 +151,6 @@ export function LotFormDialog({ isOpen, onClose, lot }: LotFormDialogProps) {
                 <CommonButton backgroundColor="grey" type="button" onClick={onClose}>
                   Cancel
                 </CommonButton>
-              </div>
-              <div style={{ height: '10rem', overflowY: 'auto' }}>
-                <DisplayFormikState {...formik} />
               </div>
             </form>
           );

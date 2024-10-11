@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import lotsSchema from '../schemas/lots.schema';
 import { StatusCodes } from 'http-status-codes';
 import positionsSchema from '../schemas/positions.schema';
+import { Lot } from '@avi/global/models';
 
 export const getLotsByPortfolioId = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
@@ -31,8 +32,9 @@ export const getLotsByStockSymbol = async (req: Request, res: Response) => {
 
 export const postLotHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
-  const portfolioId = req.params['portfolioId'] as string;
+  const portfolioId = req.body.portfolioId;
   const symbol = req.body.symbol;
+  console.log('postLotHandler', req.body);
 
   const position = await positionsSchema.findOne({ user, portfolioId, symbol });
   if (!position) {
@@ -45,11 +47,14 @@ export const postLotHandler = async (req: Request, res: Response) => {
       user,
       portfolioId,
       symbol,
+      openDate: new Date(req.body.openDate),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
     const result = await newLot.save();
-    res.status(StatusCodes.CREATED).json({ id: result.id });
+    const id = result._id;
+    const response = result.toJSON() as Lot;
+    res.status(StatusCodes.CREATED).json({ ...response, id });
   } catch (error) {
     console.error(error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
