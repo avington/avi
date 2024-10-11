@@ -1,6 +1,7 @@
 import { LoadingStatusType, Lot } from '@avi/global/models';
 import { addLot, fetchLotsBySymbolPortfolioId } from '../../data/lots.data';
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
+import { serializeError } from '@avi/global/services';
 
 export interface LotState {
   loadingStatus: LoadingStatusType;
@@ -43,7 +44,15 @@ export const addNewLotAction = createAsyncThunk<Lot, Lot>('lots/addNewLot', asyn
     const response = await addLot(lot);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error as Error);
+    if ((error as { response: { data: { errors: unknown[] } } })?.response?.data?.errors?.length) {
+      const message = (error as { response: { data: { errors: { msg: string }[] } } }).response.data.errors[0].msg;
+      console.log('message', message);
+      return rejectWithValue({
+        message,
+      });
+    }
+    const serializedError = serializeError(error);
+    return rejectWithValue(serializedError);
   }
 });
 
@@ -76,7 +85,7 @@ export const lotsSlice = createSlice({
         return { ...state, loadingStatus: 'succeeded', lots: [...(state.lots ?? []), action.payload] };
       })
       .addCase(addNewLotAction.rejected, (state, action) => {
-        return { ...state, loadingStatus: 'failed', error: action?.error };
+        return { ...state, loadingStatus: 'failed', error: action?.payload as SerializedError };
       });
   },
 });

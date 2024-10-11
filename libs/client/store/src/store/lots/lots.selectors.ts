@@ -1,23 +1,24 @@
 import { Lot } from '@avi/global/models';
 import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '..';
 
 export const selectLotsLoadingStatus = createSelector(
-  (root) => root.lots,
+  (root: RootState) => root.lots,
   (lots) => lots?.loadingStatus
 );
 
 export const selectLots = createSelector(
-  (root) => root.lots,
+  (root: RootState) => root.lots,
   (lots) => lots?.lots
 );
 
 export const selectLotsDictionary = createSelector(
-  (root) => root.lots,
+  (root: RootState) => root.lots,
   (lots) => lots?.lotsDictionary
 );
 
 export const selectLotsError = createSelector(
-  (root) => root.lots,
+  (root: RootState) => root.lots,
   (lots) => lots?.error
 );
 
