@@ -1,26 +1,88 @@
-import { averageCostBasis } from './cost-bases';
+import {
+  calculateTotalShares,
+  calculateTotalCostBasis,
+  calculateTotalMarketValue,
+  averageCostBasis,
+} from './cost-bases';
 import { Lot } from '@avi/global/models';
 
-describe('averageCostBasis', () => {
-  it('should return the correct average cost basis for BUY transactions', () => {
-    const lots: Lot[] = [
-      { transactionType: 'BUY', shares: 10, costBasis: 100, stockId: '1' },
-      { transactionType: 'BUY', shares: 20, costBasis: 200, stockId: '1' },
-    ];
-    expect(averageCostBasis(lots)).toBe(10);
+describe('Cost Bases Calculations', () => {
+  const lots: Lot[] = [
+    {
+      id: '1',
+      symbol: 'AAPL',
+      portfolioId: '1',
+      user: 'user1',
+      transactionType: 'BUY',
+      shares: 10,
+      costPerShare: 150,
+      openDate: new Date(),
+      createdAt: new Date(),
+      price: 160,
+    },
+    {
+      id: '2',
+      symbol: 'AAPL',
+      portfolioId: '1',
+      user: 'user1',
+      transactionType: 'SELL',
+      shares: 5,
+      costPerShare: 150,
+      openDate: new Date(),
+      createdAt: new Date(),
+      price: 155,
+    },
+    {
+      id: '3',
+      symbol: 'AAPL',
+      portfolioId: '1',
+      user: 'user1',
+      transactionType: 'BUY',
+      shares: 20,
+      costPerShare: 140,
+      openDate: new Date(),
+      createdAt: new Date(),
+      price: 150,
+    },
+  ];
+
+  describe('totalShares', () => {
+    it('should calculate the total shares correctly', () => {
+      expect(calculateTotalShares(lots)).toBe(25);
+    });
+
+    it('should return 0 for an empty array', () => {
+      expect(calculateTotalShares([])).toBe(0);
+    });
   });
 
-  it('should return the correct average cost basis for mixed BUY and SELL transactions', () => {
-    const lots: Lot[] = [
-      { transactionType: 'BUY', shares: 10, costBasis: 100, stockId: '1' },
-      { transactionType: 'SELL', shares: 5, costBasis: 50, stockId: '1' },
-      { transactionType: 'BUY', shares: 20, costBasis: 200, stockId: '1' },
-    ];
-    expect(averageCostBasis(lots)).toBe(10);
+  describe('totalCostBasis', () => {
+    it('should calculate the total cost basis correctly', () => {
+      expect(calculateTotalCostBasis(lots)).toBe(3550);
+    });
+
+    it('should return 0 for an empty array', () => {
+      expect(calculateTotalCostBasis([])).toBe(0);
+    });
   });
 
-  it('should handle an empty array of lots', () => {
-    const lots: Lot[] = [];
-    expect(averageCostBasis(lots)).toBe(0);
+  describe('totalMarketValue', () => {
+    it('should calculate the total market value correctly', () => {
+      expect(calculateTotalMarketValue(lots, 10)).toBe(250);
+    });
+
+    it('should return 0 for an empty array', () => {
+      expect(calculateTotalMarketValue([], 10)).toBe(0);
+    });
+  });
+
+  describe('averageCostBasis', () => {
+    it('should calculate the average cost basis correctly', () => {
+      expect(averageCostBasis(lots)).toBeCloseTo(142);
+    });
+
+    it('should return 0 for an empty array', () => {
+      expect(averageCostBasis([])).toBe(0);
+    });
   });
 });

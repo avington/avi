@@ -42,8 +42,6 @@ export const insertPortfolioHandler = async (req: Request, res: Response) => {
     updatedAt: new Date(),
   };
 
-  console.log('newPortfolio', newPortfolio);
-
   const portfolio = await portfolioSchema.create(newPortfolio);
   const mappedPortfolio = mapPortfolio(portfolio as Portfolio);
   res.status(201).json(mappedPortfolio);

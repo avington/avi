@@ -1,5 +1,32 @@
 import { Lot } from '@avi/global/models';
 
+export const calculateTotalShares = (lots: Lot[]): number => {
+  return lots.reduce((acc, lot) => {
+    if (lot.transactionType === 'BUY') {
+      return acc + lot.shares;
+    } else if (lot.transactionType === 'SELL') {
+      return acc - lot.shares;
+    }
+    return acc;
+  }, 0);
+};
+
+export const calculateTotalCostBasis = (lots: Lot[]): number => {
+  return lots.reduce((acc, lot) => {
+    const lotCostBasis = lot.shares * lot.costPerShare;
+    if (lot.transactionType === 'BUY') {
+      return acc + lotCostBasis;
+    } else if (lot.transactionType === 'SELL') {
+      return acc - lotCostBasis;
+    }
+    return acc;
+  }, 0);
+};
+
+export const calculateTotalMarketValue = (lots: Lot[], price: number): number => {
+  return calculateTotalShares(lots) * price;
+};
+
 export const averageCostBasis = (lots: Lot[]): number => {
   if (lots.length === 0) {
     return 0;
@@ -14,10 +41,11 @@ export const averageCostBasis = (lots: Lot[]): number => {
   }, 0);
 
   const totalCost = lots.reduce((acc, lot) => {
+    const costBasis = lot.shares * lot.costPerShare;
     if (lot.transactionType === 'BUY') {
-      return acc + lot.costBasis;
+      return acc + costBasis;
     } else if (lot.transactionType === 'SELL') {
-      return acc - lot.costBasis;
+      return acc - costBasis;
     }
     return acc;
   }, 0);

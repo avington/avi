@@ -3,8 +3,8 @@
     gap: 1rem;
     grid-template-areas:
         'symbol name name name'
-        'price change unrealized realized' 
-        'total . market .';
+        'price shares unrealized realized' 
+        'total avg-cost market .';
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     width: 1280px;
@@ -12,18 +12,24 @@
 
 .symbol {
     grid-area: symbol;
+    text-transform: uppercase;
 }
 
 .name {
     grid-area: name;
+    text-transform: uppercase;
 }
 
 .price {
     grid-area: price;
 }
 
-.day-change {
-    grid-area: change;
+.shares {
+    grid-area: shares;
+}
+
+.avg-cost {
+    grid-area: avg-cost;
 }
 
 .unrealized {
@@ -40,4 +46,13 @@
 
 .market {
     grid-area: market;
+}
+
+.cell-heading {
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.cell-detail {
+    font-weight: 300;
+    font-size: 1.2rem;
 }

@@ -6,7 +6,6 @@ const positionsSchema = new Schema<Position>({
   id: { type: String },
   name: { type: String },
   symbol: { type: String, required: true },
-  averageCostBasis: { type: Number, required: false },
   avgVolume: { type: Number, required: false },
   change: { type: Number, required: false },
   changesPercentage: { type: Number, required: false },
@@ -35,6 +34,10 @@ const positionsSchema = new Schema<Position>({
   yearLow: { type: Number, required: false },
   timestamp: { type: Number, required: false },
   user: { type: String, required: true },
+  costBasis: { type: Number, default: 0 },
+  shares: { type: Number, default: 0 },
+  totalCostBasis: { type: Number, default: 0 },
+  averageCostBasis: { type: Number, default: 0 },
 });
 
 export default mongoose.model<Position>('Position', positionsSchema);
