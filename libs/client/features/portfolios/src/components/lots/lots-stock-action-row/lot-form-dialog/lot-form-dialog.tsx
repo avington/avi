@@ -31,8 +31,8 @@ export interface LotFormDialogProps {
 
 const validationSchema = yup.object().shape({
   openDate: yup.date().max(new Date(), 'Open Date cannot be in the future').required('Open Date is required'),
-  shares: yup.number().min(0, 'Shares must be greater than 0').required('Shares is required'),
-  costPerShare: yup.number().min(0, 'Cost Per Share must be greater than 0').required('Cost Per Share is required'),
+  shares: yup.number().min(1, 'Shares must be greater than 0').required('Shares is required'),
+  costPerShare: yup.number().min(1, 'Cost Per Share must be greater than 0').required('Cost Per Share is required'),
   transactionType: yup.string().required('Transaction Type is required'),
 });
 

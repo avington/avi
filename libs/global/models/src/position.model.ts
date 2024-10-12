@@ -40,6 +40,7 @@ export interface Position {
     shortTerm: { amount: number; percentage: number };
     longTerm: { amount: number; percentage: number };
   };
+  totalCostBasis?: number;
   averageCostBasis?: number;
   createdAt: Date;
   updatedAt: Date;

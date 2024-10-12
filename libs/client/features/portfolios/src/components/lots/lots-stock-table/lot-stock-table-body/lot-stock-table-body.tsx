@@ -1,9 +1,12 @@
 import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
 import {
   getLotsAction,
+  getPositionsAction,
   RootState,
   selectLotsBySymbolPortfolioId,
   selectLotsLoadingStatus,
+  selectPositionsDictionary,
+  selectPositionsLoadingStatus,
   useAppDispatch,
   useAppSelector,
 } from '@avi/client-store';
@@ -16,11 +19,17 @@ export function LotStockTableBody() {
   const { symbol, portfolioId } = useParams<{ symbol: string; portfolioId: string }>();
   const dispatch = useAppDispatch();
   const loadingStatus = useAppSelector(selectLotsLoadingStatus);
+  const positionLoadingStatus = useAppSelector(selectPositionsLoadingStatus);
   const lots = useAppSelector((state: RootState) => selectLotsBySymbolPortfolioId(state, { portfolioId, symbol }));
+  const position = useAppSelector(selectPositionsDictionary)?.[symbol ?? ''];
 
   useEffect(() => {
     if (loadingStatus === 'idle' && portfolioId && symbol) dispatch(getLotsAction({ portfolioId, symbol }));
   }, [dispatch, portfolioId, symbol, loadingStatus]);
+
+  useEffect(() => {
+    if (positionLoadingStatus === 'idle' && portfolioId) dispatch(getPositionsAction({ portfolioId }));
+  }, [dispatch, portfolioId, positionLoadingStatus]);
 
   return (
     <tbody>
@@ -38,7 +47,7 @@ export function LotStockTableBody() {
           {(lots ?? [])
             .filter((f) => f.portfolioId === portfolioId && f.symbol === symbol)
             .map((lot) => (
-              <LotStockTableRow key={lot.id} lot={lot} />
+              <LotStockTableRow key={lot.id} lot={lot} position={position} />
             ))}
         </RenderWhen.If>
         <RenderWhen.If isTrue={loadingStatus !== 'loading' && !lots?.length}>

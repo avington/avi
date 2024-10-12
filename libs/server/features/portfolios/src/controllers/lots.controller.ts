@@ -34,7 +34,6 @@ export const postLotHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
   const portfolioId = req.body.portfolioId;
   const symbol = req.body.symbol;
-  console.log('postLotHandler', req.body);
 
   const position = await positionsSchema.findOne({ user, portfolioId, symbol });
   if (!position) {
