@@ -46,6 +46,7 @@ export function LotStockTableBody() {
         <RenderWhen.If isTrue={loadingStatus !== 'loading' && !!lots}>
           {(lots ?? [])
             .filter((f) => f.portfolioId === portfolioId && f.symbol === symbol)
+            .sort((a, b) => new Date(b.openDate).getTime() - new Date(a.openDate).getTime())
             .map((lot) => (
               <LotStockTableRow key={lot.id} lot={lot} position={position} />
             ))}
