@@ -6,6 +6,7 @@ export function LotStockTableHeader() {
     <thead>
       <TableRow>
         <TableHeader>Open Date</TableHeader>
+        <TableHeader>Trans Type</TableHeader>
         <TableHeader>Shares +/-</TableHeader>
         <TableHeader>Price</TableHeader>
         <TableHeader>Cost/Share</TableHeader>

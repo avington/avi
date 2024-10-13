@@ -1,8 +1,8 @@
-import { LargePanel } from '@avi/client-components';
+import { LargePanel, SummaryDetail, SummaryLabel } from '@avi/client-components';
 import { selectPositionGainLoss, selectPositionsDictionary, useAppSelector } from '@avi/client-store';
 import { useParams } from 'react-router-dom';
 import styles from './lots-stock-summary.module.scss';
-import { formatCurrency, formatCurrencyAndPercentage, formatNumber } from '@avi/global/services';
+import { formatCurrency, formatCurrencyAndPercentage, formatNumber, isProfitEvenLoss } from '@avi/global/services';
 
 export function LotsStockSummary() {
   const { symbol, portfolioId } = useParams<{ symbol: string; portfolioId: string }>();
@@ -18,34 +18,34 @@ export function LotsStockSummary() {
           <h2 className={styles['name']}>NVIDIA Corporation</h2>
         </div>
         <div className={styles['price']}>
-          <h5 className={styles['cell-heading']}>Price</h5>
-          <h5 className={styles['cell-detail']}>{formatCurrency(position?.price ?? 0)}</h5>
+          <SummaryLabel> Price</SummaryLabel>
+          <SummaryDetail>{formatCurrency(position?.price ?? 0)}</SummaryDetail>
         </div>
         <div className={styles['shares']}>
-          <h5 className={styles['cell-heading']}>Shares</h5>
-          <h5 className={styles['cell-detail']}>{formatNumber(position?.shares ?? 0)}</h5>
+          <SummaryLabel> Shares</SummaryLabel>
+          <SummaryDetail>{formatNumber(position?.shares ?? 0)}</SummaryDetail>
         </div>
         <div className={styles['avg-cost']}>
-          <h5 className={styles['cell-heading']}>Avg Cost</h5>
-          <h5 className={styles['cell-detail']}>{formatCurrency(position?.averageCostBasis ?? 0)}</h5>
+          <SummaryLabel> Average Cost</SummaryLabel>
+          <SummaryDetail>{formatCurrency(position?.averageCostBasis ?? 0)}</SummaryDetail>
         </div>
         <div className={styles['unrealized']}>
-          <h5 className={styles['cell-heading']}>Unrealized Gains</h5>
-          <h5 className={styles['cell-detail']}>
+          <SummaryLabel> Unrealized Gains</SummaryLabel>
+          <SummaryDetail profitEvenLoss={isProfitEvenLoss(positionGainLoss?.gainLoss)}>
             {formatCurrencyAndPercentage(positionGainLoss?.gainLoss ?? 0, positionGainLoss?.gainLossPercentage ?? 0)}
-          </h5>
+          </SummaryDetail>
         </div>
         <div className={styles['realized']}>
-          <h5 className={styles['cell-heading']}>Realized Gains</h5>
-          <h5 className={styles['cell-detail']}>$5,000 (5.0%)</h5>
+          <SummaryLabel> Realized Gains</SummaryLabel>
+          <SummaryDetail profitEvenLoss={'even'}>$0 (0.0%)</SummaryDetail>
         </div>
         <div className={styles['total']}>
-          <h5 className={styles['cell-heading']}>Total Cost Basis</h5>
-          <h5 className={styles['cell-detail']}>{formatCurrency(position?.totalCostBasis ?? 0)}</h5>
+          <SummaryLabel> Total Cost Basis</SummaryLabel>
+          <SummaryDetail>{formatCurrency(position?.totalCostBasis ?? 0)}</SummaryDetail>
         </div>
         <div className={styles['market']}>
-          <h5 className={styles['cell-heading']}>Market Value</h5>
-          <h5 className={styles['cell-detail']}>{formatCurrency((position?.price ?? 0) * (position?.shares ?? 0))}</h5>
+          <SummaryLabel> Market Value</SummaryLabel>
+          <SummaryDetail>{formatCurrency((position?.price ?? 0) * (position?.shares ?? 0))}</SummaryDetail>
         </div>
       </div>
     </LargePanel>
