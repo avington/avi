@@ -9,7 +9,8 @@ export interface Portfolio {
   updatedAt?: Date;
   isActive?: boolean;
   totalSymbols?: number;
-  totalCostBases?: number;
+  totalCostBasis?: number;
+  averageCostBasis?: number;
   dayChange?: {
     amount: number;
     percentage: number;

@@ -2,6 +2,7 @@ import { Lot } from '@avi/global/models';
 import mongoose, { Schema } from 'mongoose';
 import { calculateTotalCostBasis, calculateTotalShares } from '@avi/global/services';
 import Position from './positions.schema';
+import Portfolio from './portfolio.schema';
 
 export const lotsSchema = new Schema<Lot>({
   id: { type: String },
@@ -27,21 +28,57 @@ lotsSchema.post('save', async function (doc: Lot) {
     console.log('doc', doc);
     const { user, portfolioId, symbol } = doc;
     const LotModel = mongoose.model<Lot>('Lot', lotsSchema);
-    const lots = await LotModel.find({ user, portfolioId, symbol });
+    const lotsForPortfolio = await LotModel.find({ user, portfolioId });
 
-    const shares = calculateTotalShares(lots);
-    const totalCostBasis = calculateTotalCostBasis(lots);
-    const averageCostBasis = totalCostBasis / shares;
+    const sharesPortfolio = calculateTotalShares(lotsForPortfolio);
+    const totalCostBasisPortfolio = calculateTotalCostBasis(lotsForPortfolio);
+    const averageCostBasisPortfolio = totalCostBasisPortfolio / sharesPortfolio;
 
-    console.log('Calculated values:', { shares, totalCostBasis, averageCostBasis });
+    console.log('Calculated values:', {
+      totalCostBasis: totalCostBasisPortfolio,
+      averageCostBasis: averageCostBasisPortfolio,
+    });
 
-    const result = await Position.updateOne(
-      { user, portfolioId, symbol },
-      { $set: { totalCostBasis, averageCostBasis, shares } }
+    console.log('users', user);
+    console.log('portfolioId', portfolioId);
+
+    const result = await Portfolio.updateOne(
+      { user, _id: portfolioId },
+      {
+        $set: {
+          totalCostBasis: totalCostBasisPortfolio,
+          averageCostBasis: averageCostBasisPortfolio,
+        },
+      }
     );
-    console.log('Position update result:', result);
+    console.log('Portfolio update result:', result);
+
+    // Update position
+    const lotsForSymbol = lotsForPortfolio.filter((lot) => lot.symbol === symbol);
+    const sharesSymbol = calculateTotalShares(lotsForSymbol);
+    const totalCostBasisSymbol = calculateTotalCostBasis(lotsForSymbol);
+    const averageCostBasisSymbol = totalCostBasisSymbol / sharesSymbol;
+
+    console.log('Calculated values:', {
+      shares: sharesSymbol,
+      totalCostBasis: totalCostBasisSymbol,
+      averageCostBasis: averageCostBasisSymbol,
+    });
+
+    const resultSymbol = await Position.updateOne(
+      { user, portfolioId, symbol },
+      {
+        $set: {
+          totalCostBasis: totalCostBasisSymbol,
+          averageCostBasis: averageCostBasisSymbol,
+          shares: sharesSymbol,
+        },
+      }
+    );
+    console.log('Position update result:', resultSymbol);
   } catch (error) {
     console.error(error);
+    throw new Error('Error updating portfolio and position');
   }
 });
 

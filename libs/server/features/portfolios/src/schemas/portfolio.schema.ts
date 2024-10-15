@@ -8,6 +8,8 @@ const portfolioSchema = new Schema<Portfolio>({
   user: { type: String, required: true },
   createdAt: { type: Date, default: Date.now, required: true },
   updatedAt: { type: Date, required: false },
+  totalCostBasis: { type: Number, default: 0 },
+  averageCostBasis: { type: Number, default: 0 },
 });
 
 export default mongoose.model<Portfolio>('Portfolio', portfolioSchema);
