@@ -31,8 +31,11 @@ export function LotsStockSummary() {
         </div>
         <div className={styles['unrealized']}>
           <SummaryLabel> Unrealized Gains</SummaryLabel>
-          <SummaryDetail $profitEvenLoss={isProfitEvenLoss(positionGainLoss?.gainLoss)}>
-            {formatCurrencyAndPercentage(positionGainLoss?.gainLoss ?? 0, positionGainLoss?.gainLossPercentage ?? 0)}
+          <SummaryDetail $profitEvenLoss={isProfitEvenLoss(positionGainLoss?.unrealizedGains?.total?.amount)}>
+            {formatCurrencyAndPercentage(
+              positionGainLoss?.unrealizedGains?.total?.amount ?? 0,
+              positionGainLoss?.unrealizedGains?.total?.percentage ?? 0
+            )}
           </SummaryDetail>
         </div>
         <div className={styles['realized']}>

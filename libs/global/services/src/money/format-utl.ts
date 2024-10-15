@@ -1,17 +1,17 @@
-export function formatCurrency(number: number): string {
+export function formatCurrency(number: number, decimal = 2): string {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 2,
+    maximumFractionDigits: decimal,
   });
 
   return formatter.format(number);
 }
 
-export function formatPercentage(number: number): string {
+export function formatPercentage(number: number, decimals = 2): string {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'percent',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: decimals,
   });
 
   return formatter.format(number);

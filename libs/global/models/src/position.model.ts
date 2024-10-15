@@ -32,13 +32,13 @@ export interface Position {
   isActive?: boolean;
   realizedGains?: {
     total: { amount: number; percentage: number };
-    shortTerm: { amount: number; percentage: number };
-    longTerm: { amount: number; percentage: number };
+    shortTerm?: { amount: number; percentage: number };
+    longTer?: { amount: number; percentage: number };
   };
   unrealizedGains?: {
     total: { amount: number; percentage: number };
-    shortTerm: { amount: number; percentage: number };
-    longTerm: { amount: number; percentage: number };
+    shortTerm?: { amount: number; percentage: number };
+    longTerm?: { amount: number; percentage: number };
   };
   totalCostBasis?: number;
   averageCostBasis?: number;
