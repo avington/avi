@@ -10,11 +10,12 @@ export function HoldingsTableHeader() {
         <TableHeader>Name</TableHeader>
         <TableHeader>Shares</TableHeader>
         <TableHeader>Price</TableHeader>
-        <TableHeader>Market Value</TableHeader>
-        <TableHeader>Cost Basis</TableHeader>
         <TableHeader>Previous Close</TableHeader>
         <TableHeader>Day Change</TableHeader>
         <TableHeader>Day Change %</TableHeader>
+        <TableHeader>Market Value</TableHeader>
+        <TableHeader>Cost Basis</TableHeader>
+        <TableHeader>Total Gains</TableHeader>
       </TableRow>
     </thead>
   );
