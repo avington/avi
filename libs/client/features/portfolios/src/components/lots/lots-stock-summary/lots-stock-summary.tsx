@@ -31,13 +31,13 @@ export function LotsStockSummary() {
         </div>
         <div className={styles['unrealized']}>
           <SummaryLabel> Unrealized Gains</SummaryLabel>
-          <SummaryDetail profitEvenLoss={isProfitEvenLoss(positionGainLoss?.gainLoss)}>
+          <SummaryDetail $profitEvenLoss={isProfitEvenLoss(positionGainLoss?.gainLoss)}>
             {formatCurrencyAndPercentage(positionGainLoss?.gainLoss ?? 0, positionGainLoss?.gainLossPercentage ?? 0)}
           </SummaryDetail>
         </div>
         <div className={styles['realized']}>
           <SummaryLabel> Realized Gains</SummaryLabel>
-          <SummaryDetail profitEvenLoss={'even'}>$0 (0.0%)</SummaryDetail>
+          <SummaryDetail $profitEvenLoss={'even'}>$0 (0.0%)</SummaryDetail>
         </div>
         <div className={styles['total']}>
           <SummaryLabel> Total Cost Basis</SummaryLabel>

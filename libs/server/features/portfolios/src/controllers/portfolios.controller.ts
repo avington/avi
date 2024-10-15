@@ -117,7 +117,7 @@ const mapPortfolio: MapPortfolioType = (portfolio: Portfolio): Portfolio => {
       longTerm: longTermUnrealized,
     },
     positions: portfolio.positions,
-    totalCostBases: portfolio.totalCostBases,
+    totalCostBasis: portfolio.totalCostBasis,
     dayChange: portfolio.dayChange,
   };
 };
