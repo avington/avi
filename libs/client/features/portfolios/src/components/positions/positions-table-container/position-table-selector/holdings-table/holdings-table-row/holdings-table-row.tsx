@@ -15,11 +15,10 @@ export interface HoldingsTableRowProps {
 }
 
 export function HoldingsTableRow({ position }: HoldingsTableRowProps) {
-  console.log(position);
   return (
     <TableRow key={position.id} className={styles.row}>
       <TableCell>
-        <Link to={`/positions/${position.symbol}`}>{position.symbol}</Link>{' '}
+        <Link to={`/positions/${position.portfolioId}/stock/${position.symbol}/lots`}>{position.symbol}</Link>{' '}
       </TableCell>
       <TableCell>
         <HoldingsTransactionMenu portfolioId={position.portfolioId} symbol={position.symbol} />

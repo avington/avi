@@ -15,7 +15,7 @@ export function LotsStockSummary() {
           <h2>{position?.symbol}</h2>
         </div>
         <div className={styles['name']}>
-          <h2 className={styles['name']}>NVIDIA Corporation</h2>
+          <h2 className={styles['name']}>{position?.name}</h2>
         </div>
         <div className={styles['price']}>
           <SummaryLabel> Price</SummaryLabel>

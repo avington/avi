@@ -1,6 +1,6 @@
 .action-row {
     display: flex;
     justify-content: end;
-    width: 1280px;
+    width: var(--page-width);
     gap: 2rem;
 }

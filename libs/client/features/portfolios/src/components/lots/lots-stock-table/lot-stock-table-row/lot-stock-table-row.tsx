@@ -22,7 +22,6 @@ export function LotStockTableRow({ lot, position }: LotStockTableRowProps) {
   const [marketValue, setMarketValue] = useState<number>(0);
 
   useEffect(() => {
-    console.log('lot', lot);
     setMarketValue((position?.price ?? 0) * (lot?.shares ?? 0));
     setCostBasis((lot?.costPerShare ?? 0) * (lot?.shares ?? 0));
     setGainLoss((marketValue ?? 0) - costBasis);

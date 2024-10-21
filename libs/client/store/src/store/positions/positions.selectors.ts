@@ -22,7 +22,7 @@ export const selectPositions = createSelector(selectPositionsDictionary, (positi
     const unrealizedGains = {
       total: {
         amount: marketValue - costBasis,
-        percentage: (marketValue - costBasis) / costBasis,
+        percentage: costBasis ? (marketValue - costBasis) / costBasis : 0,
       },
     };
     return {
@@ -50,7 +50,7 @@ export const selectPositionGainLoss = createSelector(selectPositions, (positions
     const unrealizedGains = {
       total: {
         amount: marketValue - costBasis,
-        percentage: (marketValue - costBasis) / costBasis,
+        percentage: costBasis === 0 ? (marketValue - costBasis) / costBasis : 0,
       },
     };
     return { symbol, price, averageCostBasis, unrealizedGains, marketValue, costBasis } as const;
@@ -71,7 +71,7 @@ export const selectSummaryTotalGainLoss = createSelector(
   (cost, market) => {
     return {
       amount: market - cost,
-      percentage: (market - cost) / cost,
+      percentage: cost ? (market - cost) / cost : 0,
     };
   }
 );
