@@ -7,7 +7,7 @@ import PositionsTableContainer from '../../components/positions/positions-table-
 
 export function PositionsView() {
   const { portfolioId } = useParams();
-  console.log(portfolioId);
+
   return (
     <ViewContainer className={styles['container']} style={{ paddingTop: '1rem' }}>
       <div>

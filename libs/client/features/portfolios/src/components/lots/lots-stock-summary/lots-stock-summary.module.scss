@@ -7,7 +7,7 @@
         'total avg-cost market .';
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
-    width: 1280px;
+    width: var(--page-width);
 }
 
 .symbol {

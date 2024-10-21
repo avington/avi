@@ -6,12 +6,13 @@ import {
   selectSummaryTotalGainLoss,
   useAppSelector,
 } from '@avi/client-store';
-import { formatCurrency, formatCurrencyAndPercentage } from '@avi/global/services';
+import { formatCurrency, formatCurrencyAndPercentage, isProfitEvenLoss } from '@avi/global/services';
 
 export function PositionsSummaryTotals() {
   const marketValue = useAppSelector(selectSummaryMarketValue);
   const totalCostBasis = useAppSelector(selectSummaryTotalCostBasis);
   const gainLoss = useAppSelector(selectSummaryTotalGainLoss);
+
   return (
     <LargePanel className={styles['container']} style={{ width: '400px' }}>
       <section>
@@ -27,7 +28,7 @@ export function PositionsSummaryTotals() {
         </div>
         <div className={styles['summary-item']}>
           <div className={styles['summary-item__label']}>Unrealized</div>
-          <div className={styles['summary-item__value']}>
+          <div className={`${styles['summary-item__value']} ${styles[isProfitEvenLoss(gainLoss.amount)]}`}>
             {formatCurrencyAndPercentage(gainLoss.amount, gainLoss.percentage)}
           </div>
         </div>

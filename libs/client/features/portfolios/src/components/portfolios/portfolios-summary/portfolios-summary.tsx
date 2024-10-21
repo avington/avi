@@ -32,7 +32,7 @@ export function PortfoliosSummary() {
 
   return (
     <>
-      <LargePanel className={styles['container']} style={{ width: '1280px' }}>
+      <LargePanel className={styles['container']} style={{ width: 'var(--page-width)' }}>
         <div className={styles['total']}>
           <div className={styles['cell-heading']}>All Portfolio Holdings</div>
           <div className={styles['total-number']}>$600,000</div>

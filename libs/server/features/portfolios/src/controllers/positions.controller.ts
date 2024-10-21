@@ -57,6 +57,7 @@ export const insertPositionHandler = async (req: Request, res: Response) => {
 
   // get the full quote from 3rd party API
   const [quote] = await getFullQuote(req.body.symbol);
+
   console.log('quote', quote);
   const newPosition: Position = {
     ...req.body,
@@ -70,10 +71,13 @@ export const insertPositionHandler = async (req: Request, res: Response) => {
   console.log('newPosition', newPosition);
 
   const position = await positionSchema.create(newPosition);
-  res.status(StatusCodes.CREATED).json({
+  const response = {
     ...position.toObject(),
     id: position._id,
-  });
+  };
+
+  console.log('positions', response);
+  res.status(StatusCodes.CREATED).json(response);
 };
 
 export const patchPositionHandler = async (req: Request, res: Response) => {

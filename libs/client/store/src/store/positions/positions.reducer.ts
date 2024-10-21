@@ -84,6 +84,24 @@ export const positionsSlice = createSlice({
         error: action.payload as SerializedError,
       };
     });
+    builder.addCase(insertPositionAction.pending, (state) => {
+      return {
+        ...state,
+        loadingStatus: 'loading',
+      };
+    });
+    builder.addCase(insertPositionAction.fulfilled, (state, action) => {
+      const positionsDictionary = {
+        ...state.positionsDictionary,
+        [action.payload.symbol]: action.payload,
+      };
+      return {
+        ...state,
+        loadingStatus: 'succeeded',
+        positionsDictionary,
+        error: null,
+      };
+    });
   },
 });
 

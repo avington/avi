@@ -11,7 +11,7 @@ export interface PortfolioTableProps {
 
 export function PortfolioTable(props: PortfolioTableProps) {
   return (
-    <LargePanel className={styles['container']} style={{ width: '1280px' }}>
+    <LargePanel className={styles['container']} style={{ width: 'var(--page-width)' }}>
       <Table>
         <PortfoliosTableHeader />
         <PortfoliosTableBody {...props} />

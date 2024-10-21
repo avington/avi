@@ -7,7 +7,7 @@ import PositionTableSelector from './position-table-selector/position-table-sele
 export function PositionsTableContainer() {
   return (
     <PositionsTableContextProvider>
-      <LargePanel className={styles['container']} style={{ width: '1280px' }}>
+      <LargePanel className={styles['container']} style={{ width: 'var(--page-width)' }}>
         <PositionTableMenu />
         <PositionTableSelector />
       </LargePanel>

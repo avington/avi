@@ -15,7 +15,7 @@ export function PortfoliosTableRow({ portfolio }: PortfoliosTableRowProps) {
         <Link to={`/positions/${portfolio.id}`}>{portfolio.name}</Link>{' '}
       </TableCell>
       <TableCell>{formatNumber(portfolio?.totalSymbols ?? 0)}</TableCell>
-      <TableCell>{formatCurrency(portfolio?.totalCostBases ?? 0)}</TableCell>
+      <TableCell>{formatCurrency(portfolio?.totalCostBasis ?? 0)}</TableCell>
       <TableCell>{formatCurrency(portfolio?.totalMarketValue ?? 0)}</TableCell>
       <TableCell>
         {formatCurrencyAndPercentage(portfolio?.dayChange?.amount ?? 0, portfolio?.dayChange?.percentage ?? 0)}
