@@ -1,5 +1,4 @@
 import { TableHeader, TableRow } from '@avi/client-components';
-import styles from './holdings-table-header.module.scss';
 
 export function HoldingsTableHeader() {
   return (

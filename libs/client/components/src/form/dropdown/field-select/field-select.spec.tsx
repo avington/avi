@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { render } from '@avi/client-tests';
 
 import FieldSelect from './field-select';
 
 describe('FieldSelect', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<FieldSelect />);
+    const { baseElement } = render(<FieldSelect name="name" />);
     expect(baseElement).toBeTruthy();
   });
 });

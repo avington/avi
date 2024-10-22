@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '@avi/client-tests';
 
 import LotsStockActionRow from './lots-stock-action-row';
 

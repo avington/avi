@@ -8,7 +8,6 @@ import positionsReducer from './positions/positions.reducer';
 import lotsReducer from './lots/lots.reducer';
 
 const reducer = {
-  auth: authReducer,
   portfolios: portfoliosReducer,
   portFoliosSummary: portfoliosSummaryReducer,
   positions: positionsReducer,

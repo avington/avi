@@ -1,14 +1,9 @@
-import { Lot, Position } from '@avi/global/models';
-import styles from './lot-stock-table-row.module.scss';
 import { TableCell, TableRow } from '@avi/client-components';
-import { format, FormatOptions, isAfter, set } from 'date-fns';
-import {
-  formatCurrency,
-  formatCurrencyAndPercentage,
-  formatDateAsDayMonthYear,
-  formatNumber,
-} from '@avi/global/services';
+import { Lot, Position } from '@avi/global/models';
+import { formatCurrency, formatCurrencyAndPercentage, formatNumber } from '@avi/global/services';
+import { format, isAfter } from 'date-fns';
 import { useEffect, useState } from 'react';
+import styles from './lot-stock-table-row.module.scss';
 
 export interface LotStockTableRowProps {
   lot: Lot;

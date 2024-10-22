@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ToastCloseButton, ToastCloseButtonProps } from './toast-close-button';
 
-jest.mock('../../../icons', () => ({
+vi.mock('../../../icons', () => ({
   ClearIcon: jest.fn(() => <div data-testid="clear-icon" />),
 }));
 
 describe('ToastCloseButton', () => {
   const defaultProps: ToastCloseButtonProps = {
-    onClose: jest.fn(),
+    onClose: vi.fn(),
     closeIconText: 'Close',
   };
 

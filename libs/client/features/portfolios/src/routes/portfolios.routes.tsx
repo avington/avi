@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 const PortfoliosView = React.lazy(() => import('../views/portfolios-view/portfolios-view'));
 

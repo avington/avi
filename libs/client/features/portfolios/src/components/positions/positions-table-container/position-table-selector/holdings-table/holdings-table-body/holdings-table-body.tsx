@@ -1,8 +1,4 @@
 import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
-import styles from './holdings-table-body.module.scss';
-import { Skeleton } from '@mui/material';
-import { Position } from '@avi/global/models';
-import HoldingsTableRow from '../holdings-table-row/holdings-table-row';
 import {
   getPositionsAction,
   resetPositionsAction,
@@ -11,8 +7,10 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@avi/client-store';
-import { useParams } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import HoldingsTableRow from '../holdings-table-row/holdings-table-row';
 
 export function HoldingsTableBody() {
   const loadingStatus = useAppSelector(selectPositionsLoadingStatus);
