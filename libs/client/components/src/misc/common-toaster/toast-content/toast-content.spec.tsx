@@ -4,8 +4,8 @@ import { ToastContent, ToastContentProps } from './toast-content';
 
 import { ToastIcon } from '../toast-icon';
 
-jest.mock('../toast-icon', () => ({
-  ToastIcon: jest.fn(() => <div data-testid="toast-icon" />),
+vi.mock('../toast-icon', () => ({
+  ToastIcon: vi.fn(() => <div data-testid="toast-icon" />),
 }));
 describe('ToastContent', () => {
   const defaultProps: ToastContentProps = {

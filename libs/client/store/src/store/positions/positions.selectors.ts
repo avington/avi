@@ -44,7 +44,6 @@ export const selectPositionsError = createSelector(
 export const selectPositionGainLoss = createSelector(selectPositions, (positions) => {
   return positions?.map((position) => {
     const { symbol, price, averageCostBasis } = position;
-    const gainLoss = (price ?? 0) - (averageCostBasis ?? 0);
     const marketValue = (price ?? 0) * (position.shares ?? 0);
     const costBasis = (averageCostBasis ?? 0) * (position.shares ?? 0);
     const unrealizedGains = {
