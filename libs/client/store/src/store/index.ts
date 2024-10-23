@@ -1,11 +1,10 @@
 import { configureStore, createListenerMiddleware, TypedStartListening } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import authReducer from './auth.reducer';
-import { addPortfolioSummaryListener } from './portfolios-summary/portfolios-summary.listener';
-import portfoliosReducer from './portfolios/portfolios.reducer';
-import portfoliosSummaryReducer from './portfolios-summary/portfolios-summary.reducer';
-import positionsReducer from './positions/positions.reducer';
 import lotsReducer from './lots/lots.reducer';
+import { addPortfolioSummaryListener } from './portfolios-summary/portfolios-summary.listener';
+import portfoliosSummaryReducer from './portfolios-summary/portfolios-summary.reducer';
+import portfoliosReducer from './portfolios/portfolios.reducer';
+import positionsReducer from './positions/positions.reducer';
 
 const reducer = {
   portfolios: portfoliosReducer,
