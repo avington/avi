@@ -10,6 +10,11 @@ const portfolioSchema = new Schema<Portfolio>({
   updatedAt: { type: Date, required: false },
   totalCostBasis: { type: Number, default: 0 },
   averageCostBasis: { type: Number, default: 0 },
+  totalMarketValue: { type: Number, default: 0 },
+  totalSymbols: { type: Number, default: 0 },
+  dayChange: { type: Object, required: false },
+  unrealizedGains: { type: Object, required: false },
+  realizedGains: { type: Object, required: false },
 });
 
 export default mongoose.model<Portfolio>('Portfolio', portfolioSchema);

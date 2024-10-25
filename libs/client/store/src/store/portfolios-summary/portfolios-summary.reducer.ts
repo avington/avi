@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface PortfolioSummaryState {
+  totalCostBasis: number;
   totalSymbols: number;
   totalMarketValue: number;
   cashHoldings: number;
   realizedGains: number;
-  unrealizedGains: number;
+  unrealizedGains: {
+    total: number;
+    percentage: number;
+    shortTerm?: number;
+    longTerm?: number;
+  } | null;
 }
 
 export const initialPortfolioSummaryState: PortfolioSummaryState = {
@@ -13,7 +19,8 @@ export const initialPortfolioSummaryState: PortfolioSummaryState = {
   totalMarketValue: 0,
   cashHoldings: 0,
   realizedGains: 0,
-  unrealizedGains: 0,
+  unrealizedGains: null,
+  totalCostBasis: 0,
 };
 
 export const portfolioSummarySlice = createSlice({
@@ -50,22 +57,10 @@ export const portfolioSummarySlice = createSlice({
         realizedGains: action.payload,
       };
     },
-    setUnrealizedGains: (state, action: PayloadAction<number>) => {
-      return {
-        ...state,
-        unrealizedGains: action.payload,
-      };
-    },
   },
 });
 
 export default portfolioSummarySlice.reducer;
 
-export const {
-  setPortfolioSummary,
-  setTotalSymbols,
-  setTotalMarketValue,
-  setCashHoldings,
-  setRealizedGains,
-  setUnrealizedGains,
-} = portfolioSummarySlice.actions;
+export const { setPortfolioSummary, setTotalSymbols, setTotalMarketValue, setCashHoldings, setRealizedGains } =
+  portfolioSummarySlice.actions;

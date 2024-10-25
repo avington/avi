@@ -11,6 +11,12 @@ export const calculateTotalShares = (lots: Lot[]): number => {
   }, 0);
 };
 
+export const sumTotalSymbols = (lots: Lot[]): number => {
+  const symbols: string[] = lots.map((lot) => lot.symbol);
+  const uniqueSymbols = Array.from(new Set(symbols));
+  return uniqueSymbols.length;
+};
+
 export const calculateTotalCostBasis = (lots: Lot[]): number => {
   return lots.reduce((acc, lot) => {
     const lotCostBasis = lot.shares * lot.costPerShare;

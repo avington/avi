@@ -1,6 +1,6 @@
 import { Lot } from '@avi/global/models';
 import mongoose, { Schema } from 'mongoose';
-import { calculateTotalCostBasis, calculateTotalShares } from '@avi/global/services';
+import { calculateTotalCostBasis, calculateTotalShares, sumTotalSymbols } from '@avi/global/services';
 import Position from './positions.schema';
 import Portfolio from './portfolio.schema';
 
@@ -30,6 +30,7 @@ lotsSchema.post('save', async function (doc: Lot) {
     const LotModel = mongoose.model<Lot>('Lot', lotsSchema);
     const lotsForPortfolio = await LotModel.find({ user, portfolioId });
 
+    const totalSymbols = sumTotalSymbols(lotsForPortfolio);
     const sharesPortfolio = calculateTotalShares(lotsForPortfolio);
     const totalCostBasisPortfolio = calculateTotalCostBasis(lotsForPortfolio);
     const averageCostBasisPortfolio = totalCostBasisPortfolio / sharesPortfolio;
@@ -48,6 +49,7 @@ lotsSchema.post('save', async function (doc: Lot) {
         $set: {
           totalCostBasis: totalCostBasisPortfolio,
           averageCostBasis: averageCostBasisPortfolio,
+          totalSymbols: totalSymbols,
         },
       }
     );

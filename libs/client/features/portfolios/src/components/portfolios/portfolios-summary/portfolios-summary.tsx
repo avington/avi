@@ -5,12 +5,14 @@ import { useBoolean } from '@avi/client-hooks';
 import PortfolioFormDialog from '../portfolio-form-dialog/portfolio-form-dialog';
 import { Portfolio } from '@avi/global/models';
 import { useCallback } from 'react';
-import { addPortfolioAction, useAppDispatch } from '@avi/client-store';
+import { addPortfolioAction, selectTotalCostBasis, useAppDispatch, useAppSelector } from '@avi/client-store';
+import { formatCurrency } from '@avi/global/services';
 
 export function PortfoliosSummary() {
   const { setTrue: setModalTrue, setFalse: setModalFalse, value: isModalOpen } = useBoolean(false);
   const { setTrue: setAddSuccessTrue, setFalse: setAddSuccessFalse, value: isAddSuccessToaster } = useBoolean(false);
   const { setTrue: setAddFailedTrue, setFalse: setAddFailedFalse, value: isAddFailedToaster } = useBoolean(false);
+  const totalCostBasis = useAppSelector(selectTotalCostBasis);
   const dispatch = useAppDispatch();
 
   const handleOpen = () => {
@@ -49,6 +51,10 @@ export function PortfoliosSummary() {
         <div className={styles['day-change']}>
           <div className={styles['cell-heading']}>Day Change</div>
           <div>$5,000 (5.0%)</div>
+        </div>
+        <div className={styles['cost-basis']}>
+          <div className={styles['cell-heading']}>Cost Basis</div>
+          <div>{formatCurrency(totalCostBasis, 0)}</div>
         </div>
         <div className={styles['unrealized']}>
           <div className={styles['cell-heading']}>Unrealized Gains</div>

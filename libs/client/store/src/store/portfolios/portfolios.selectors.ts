@@ -25,3 +25,7 @@ export const selectPortfolioIsLoading = createSelector(
   selectPortfoliosLoadingStatus,
   (loadingStatus) => loadingStatus === 'loading'
 );
+
+export const selectTotalCostBasis = createSelector(selectPortfolios, (portfolios) => {
+  return portfolios?.reduce((acc, portfolio) => acc + (portfolio?.totalCostBasis ?? 0), 0) || 0;
+});
