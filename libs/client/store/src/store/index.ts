@@ -1,10 +1,11 @@
 import { configureStore, createListenerMiddleware, TypedStartListening } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import lotsReducer from './lots/lots.reducer';
-import { addPortfolioSummaryListener } from './portfolios-summary/portfolios-summary.listener';
+import { addPortfolioSummaryListener as portfolioSummaryAddListener } from './portfolios-summary/portfolios-summary.listener';
 import portfoliosSummaryReducer from './portfolios-summary/portfolios-summary.reducer';
 import portfoliosReducer from './portfolios/portfolios.reducer';
 import positionsReducer from './positions/positions.reducer';
+import { lotUpdateListener } from './lots/lots.listener';
 
 const reducer = {
   portfolios: portfoliosReducer,
@@ -31,4 +32,5 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 // listeners
-addPortfolioSummaryListener(startAppListening);
+portfolioSummaryAddListener(startAppListening);
+lotUpdateListener(startAppListening);

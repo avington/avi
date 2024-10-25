@@ -1,6 +1,6 @@
 import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
 import {
-  getPositionsAction,
+  loadPositionsAction,
   resetPositionsAction,
   selectPositions,
   selectPositionsLoadingStatus,
@@ -25,7 +25,7 @@ export function HoldingsTableBody() {
 
   useEffect(() => {
     if (loadingStatus === 'idle' && portfolioId) {
-      dispatch(getPositionsAction({ portfolioId }));
+      dispatch(loadPositionsAction({ portfolioId }));
     }
   }, [dispatch, loadingStatus, portfolioId]);
 

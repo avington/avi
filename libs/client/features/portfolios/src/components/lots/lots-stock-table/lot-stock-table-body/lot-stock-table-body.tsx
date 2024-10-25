@@ -1,7 +1,7 @@
 import { RenderWhen, TableCell, TableRow } from '@avi/client-components';
 import {
   getLotsAction,
-  getPositionsAction,
+  loadPositionsAction,
   RootState,
   selectLotsBySymbolPortfolioId,
   selectLotsLoadingStatus,
@@ -24,12 +24,8 @@ export function LotStockTableBody() {
   const position = useAppSelector(selectPositionsDictionary)?.[symbol ?? ''];
 
   useEffect(() => {
-    if (loadingStatus === 'idle' && portfolioId && symbol) dispatch(getLotsAction({ portfolioId, symbol }));
-  }, [dispatch, portfolioId, symbol, loadingStatus]);
-
-  useEffect(() => {
-    if (positionLoadingStatus === 'idle' && portfolioId) dispatch(getPositionsAction({ portfolioId }));
-  }, [dispatch, portfolioId, positionLoadingStatus]);
+    dispatch(getLotsAction({ portfolioId, symbol }));
+  }, [dispatch, portfolioId, symbol]);
 
   return (
     <tbody>

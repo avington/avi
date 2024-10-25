@@ -15,7 +15,7 @@ export const initialPositionsState: PositionState = {
   error: null,
 };
 
-export const getPositionsAction = createAsyncThunk<Position[], { portfolioId: string }>(
+export const loadPositionsAction = createAsyncThunk<Position[], { portfolioId: string }>(
   'positions/getPositions',
   async ({ portfolioId }, { rejectWithValue }) => {
     try {
@@ -58,13 +58,13 @@ export const positionsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getPositionsAction.pending, (state) => {
+    builder.addCase(loadPositionsAction.pending, (state) => {
       return {
         ...state,
         loadingStatus: 'loading',
       };
     });
-    builder.addCase(getPositionsAction.fulfilled, (state, action) => {
+    builder.addCase(loadPositionsAction.fulfilled, (state, action) => {
       const positionsDictionary = action.payload.reduce((acc, position) => {
         acc[position.symbol] = position;
         return acc;
@@ -77,7 +77,7 @@ export const positionsSlice = createSlice({
         error: null,
       };
     });
-    builder.addCase(getPositionsAction.rejected, (state, action) => {
+    builder.addCase(loadPositionsAction.rejected, (state, action) => {
       return {
         ...state,
         loadingStatus: 'failed',
