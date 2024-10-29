@@ -6,6 +6,7 @@ export const getPortfoliosHandler = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? 'anonymous';
 
   const portfolios = await portfolioSchema.find({ user });
+
   res.status(StatusCodes.OK).json(
     portfolios.map((portfolio) => ({
       ...portfolio.toObject(),

@@ -3,11 +3,15 @@ import { Router } from 'express';
 import { createPositionHandler, patchPositionHandler, deletePositionHandler } from '../commands/positions';
 
 import { getPositionHandler, getPositionsByPortfolioHandler, getPositionsHandler } from '../queries/positions';
+import { batchUpdatePricePositionHandler } from '../commands/positions/batch-update-price-positon.handler';
+import { updateQuoteHandler } from '../commands/positions/update-quote.handler';
 
 const commandNames = {
   createPosition: 'createPosition',
   patchPosition: 'patchPosition',
   deletePosition: 'deletePosition',
+  batchUpdatePricePositionHandler: 'batchUpdatePricePositionHandler',
+  updateQuote: 'updateQuote',
 };
 
 const queryNames = {
@@ -25,6 +29,8 @@ mediator.subscribe(queryNames.getPositionsByPortfolio, getPositionsByPortfolioHa
 mediator.subscribe(commandNames.createPosition, createPositionHandler);
 mediator.subscribe(commandNames.patchPosition, patchPositionHandler);
 mediator.subscribe(commandNames.deletePosition, deletePositionHandler);
+mediator.subscribe(commandNames.batchUpdatePricePositionHandler, batchUpdatePricePositionHandler);
+mediator.subscribe(commandNames.updateQuote, updateQuoteHandler);
 
 // Define the router
 const positionsRouter: Router = Router();
@@ -36,6 +42,12 @@ positionsRouter
 positionsRouter
   .route('/portfolio/:portfolioId')
   .get(mediator.publish.bind(mediator, queryNames.getPositionsByPortfolio));
+
+positionsRouter
+  .route('/:portfolioId/batch-update-price')
+  .patch(mediator.publish.bind(mediator, commandNames.batchUpdatePricePositionHandler));
+
+positionsRouter.route('/:portfolioId/update-price').patch(mediator.publish.bind(mediator, commandNames.updateQuote));
 
 positionsRouter
   .route('/:id')
