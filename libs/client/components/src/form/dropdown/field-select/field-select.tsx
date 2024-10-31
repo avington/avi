@@ -1,7 +1,6 @@
-import { useFormikContext, useField } from 'formik';
-import styles from './field-select.module.scss';
-import { StyledDropdown } from '../styled-dropdown';
+import { useField, useFormikContext } from 'formik';
 import { PropsWithChildren } from 'react';
+import { StyledDropdown } from '../styled-dropdown';
 
 export interface FieldSelectProps {
   name: string;

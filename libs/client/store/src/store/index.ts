@@ -5,13 +5,16 @@ import { addPortfolioSummaryListener as portfolioSummaryAddListener } from './po
 import portfoliosSummaryReducer from './portfolios-summary/portfolios-summary.reducer';
 import portfoliosReducer from './portfolios/portfolios.reducer';
 import positionsReducer from './positions/positions.reducer';
+import quoteUpdateReducer from './quote-update/quote-update.reducer';
 import { lotUpdateListener } from './lots/lots.listener';
+import { portfolioLoadedListener } from './portfolios';
 
 const reducer = {
   portfolios: portfoliosReducer,
   portFoliosSummary: portfoliosSummaryReducer,
   positions: positionsReducer,
   lots: lotsReducer,
+  quoteUpdate: quoteUpdateReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();
@@ -32,5 +35,6 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 // listeners
+portfolioLoadedListener(startAppListening);
 portfolioSummaryAddListener(startAppListening);
 lotUpdateListener(startAppListening);
