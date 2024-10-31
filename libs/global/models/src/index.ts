@@ -5,3 +5,5 @@ export * from './position.model';
 export * from './loading-status.type';
 export * from './holding-periods.type';
 export * from './batch-quote.model';
+export * from './stream-message.types';
+export * from './stream-message.model';

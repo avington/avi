@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useSpring, animated } from 'react-spring';
-import { useBoolean, useOnClickOutside, useOutsideAlerter, UseOutsideAlerterRequest } from '@avi/client-hooks';
-import styles from './button-menu.module.scss';
+import { useBoolean, useOutsideAlerter, UseOutsideAlerterRequest } from '@avi/client-hooks';
 import MenuIcon from '@mui/icons-material/Menu';
+import React, { useRef } from 'react';
+import { animated, useSpring } from 'react-spring';
+import styles from './button-menu.module.scss';
 
 import styled from 'styled-components';
 
@@ -19,7 +19,7 @@ export interface ButtonMenuProps {
 }
 
 export function ButtonMenu({ items }: ButtonMenuProps) {
-  const { value: isOpen, toggle, setFalse, setValue } = useBoolean(false);
+  const { value: isOpen, toggle, setFalse } = useBoolean(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 

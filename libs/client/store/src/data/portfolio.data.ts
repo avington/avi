@@ -20,3 +20,8 @@ export const deletePortfolio = async (id: string) => {
   const baseUrl = process.env.VITE_API_URL || '';
   return axios.delete(baseUrl + '/portfolios/' + id);
 };
+
+export const getAllSymbols = async () => {
+  const baseUrl = process.env.VITE_API_URL || '';
+  return axios.get<{ symbol: string; portfolioId: string }[]>(baseUrl + '/positions/symbols');
+};

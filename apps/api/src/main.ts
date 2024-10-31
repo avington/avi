@@ -1,13 +1,15 @@
 import { connectToDatabase } from '@avi/serer/database';
-import { portfolioRouter, positionsRouter, lotsRouter } from '@avi/server/features/portfolios';
+import { portfolioRouter, positionsRouter, lotsRouter, wsQuoteRouter } from '@avi/server/features/portfolios';
 import cors from 'cors';
 import express from 'express';
 import * as path from 'path';
 import morgan from 'morgan';
+import wsExpress from 'express-ws';
 
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
 
 const app = express();
+const { app: wsApp } = wsExpress(app);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -31,6 +33,9 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/api/v1/portfolios', portfolioRouter);
 app.use('/api/v1/positions', positionsRouter);
 app.use('/api/v1/lots', lotsRouter);
+
+// websocket routes
+wsQuoteRouter(wsApp, '/api/v1/quotes');
 
 // connect to mongo
 const db = async () => await connectToDatabase();

@@ -1,10 +1,14 @@
 import { mediator } from '@avi/server/middleware';
 import { Router } from 'express';
-import { createPositionHandler, patchPositionHandler, deletePositionHandler } from '../commands/positions';
+import { createPositionHandler, deletePositionHandler, patchPositionHandler } from '../commands/positions';
 
-import { getPositionHandler, getPositionsByPortfolioHandler, getPositionsHandler } from '../queries/positions';
-import { batchUpdatePricePositionHandler } from '../commands/positions/batch-update-price-positon.handler';
 import { updateQuoteHandler } from '../commands/positions/update-quote.handler';
+import {
+  getAllPositionsHandler,
+  getPositionHandler,
+  getPositionsByPortfolioHandler,
+  getPositionsHandler,
+} from '../queries/positions';
 
 const commandNames = {
   createPosition: 'createPosition',
@@ -18,22 +22,28 @@ const queryNames = {
   getPositions: 'getPositions',
   getPositionsByPortfolio: 'getPositionsByPortfolio',
   getPosition: 'getPosition',
+  getAllSymbols: 'getAllSymbols',
 };
 
 // Subscribe to the queries
 mediator.subscribe(queryNames.getPosition, getPositionHandler);
 mediator.subscribe(queryNames.getPositions, getPositionsHandler);
 mediator.subscribe(queryNames.getPositionsByPortfolio, getPositionsByPortfolioHandler);
+mediator.subscribe(queryNames.getAllSymbols, getAllPositionsHandler);
 
 // Subscribe to the commands
 mediator.subscribe(commandNames.createPosition, createPositionHandler);
 mediator.subscribe(commandNames.patchPosition, patchPositionHandler);
 mediator.subscribe(commandNames.deletePosition, deletePositionHandler);
-mediator.subscribe(commandNames.batchUpdatePricePositionHandler, batchUpdatePricePositionHandler);
 mediator.subscribe(commandNames.updateQuote, updateQuoteHandler);
 
 // Define the router
 const positionsRouter: Router = Router();
+
+positionsRouter.route('/:portfolioId/update-price').patch(mediator.publish.bind(mediator, commandNames.updateQuote));
+
+positionsRouter.route('/symbols').get(mediator.publish.bind(mediator, queryNames.getAllSymbols));
+
 positionsRouter
   .route('/')
   .get(mediator.publish.bind(mediator, queryNames.getPositions))
@@ -46,8 +56,6 @@ positionsRouter
 positionsRouter
   .route('/:portfolioId/batch-update-price')
   .patch(mediator.publish.bind(mediator, commandNames.batchUpdatePricePositionHandler));
-
-positionsRouter.route('/:portfolioId/update-price').patch(mediator.publish.bind(mediator, commandNames.updateQuote));
 
 positionsRouter
   .route('/:id')

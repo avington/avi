@@ -1,5 +1,4 @@
 import { useField, useFormikContext } from 'formik';
-import styles from './field-input.module.scss';
 import { StyledInput } from '../styled-input';
 
 export interface FieldInputProps {
