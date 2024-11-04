@@ -22,24 +22,22 @@ export const getFullQuote = async (symbol: string) => {
   }
 };
 
-export const getBatchQuotes = async (symbols: string[]) => {
+export const getBatchQuote = async (symbols: string[]) => {
+  const v4Url = process.env['NX_PUBLIC_FMP_API_URL_V4'];
   const key = process.env['NX_PUBLIC_FMP_API_KEY'];
   if (!key) {
     throw new Error('Missing API key');
   }
-
-  const baseUrl = process.env['NX_PUBLIC_FMP_API_URL_V4'];
-  if (!baseUrl) {
-    throw new Error(`Missing API URL ${baseUrl}`);
+  if (!v4Url) {
+    throw new Error('Missing API URL');
   }
-
   try {
-    const url = `${baseUrl}/batch-pre-post-market/${symbols.join(',')}?apikey=${key}`;
+    const url = `${v4Url}/batch-pre-post-market?apikey=${key}&symbols=${symbols.join(',')}`;
     console.log('url', url);
     const response = await fetch(url);
-    return response.json() as Promise<BatchQuote[]>;
+    return response.json();
   } catch (error) {
-    console.error('Error calling: /quote/', error);
+    console.error('Error calling: /quotes', error);
     throw error;
   }
 };

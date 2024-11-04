@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import portfolioSchema from '../../schemas/portfolio.schema';
 import { StatusCodes } from 'http-status-codes';
-import { getFullQuote } from '../../services/fmp/full-quote.service';
+import { getFullQuote } from '../../services/fmp/quote.service';
 import { Position } from '@avi/global/models';
 import positionsSchema from '../../schemas/positions.schema';
 
