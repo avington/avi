@@ -5,6 +5,8 @@ import express from 'express';
 import * as path from 'path';
 import morgan from 'morgan';
 import wsExpress from 'express-ws';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 
 const clientDomain = process.env.NX_PUBLIC_CLIENT_DOMAIN || 'http://localhost:3000';
 
@@ -28,8 +30,11 @@ if (dev) {
 }
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(helmet());
+app.use(mongoSanitize());
 
 // Middleware to handle all the routes
+// TODO: add rate limiting on public routes
 app.use('/api/v1/portfolios', portfolioRouter);
 app.use('/api/v1/positions', positionsRouter);
 app.use('/api/v1/lots', lotsRouter);

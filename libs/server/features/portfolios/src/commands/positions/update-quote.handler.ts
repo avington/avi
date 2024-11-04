@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import positionsSchema from '../../schemas/positions.schema';
-import { getFullQuote } from '../../services/fmp/full-quote.service';
+import { getFullQuote } from '../../services/fmp/quote.service';
 
 export const updateQuoteHandler = async (request: Request, response: Response) => {
   const user = process.env['NX_PUBLIC_DEV_USER'] ?? '';
