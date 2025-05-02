@@ -1,5 +1,3 @@
-import { BatchQuote } from '@avi/global/models';
-
 export const getFullQuote = async (symbol: string) => {
   const key = process.env['NX_PUBLIC_FMP_API_KEY'];
   if (!key) {
@@ -32,10 +30,12 @@ export const getBatchQuote = async (symbols: string[]) => {
     throw new Error('Missing API URL');
   }
   try {
-    const url = `${v4Url}/batch-pre-post-market?apikey=${key}&symbols=${symbols.join(',')}`;
-    console.log('url', url);
+    const url = `${v4Url}/batch-pre-post-market/${symbols.join(',')}?apikey=${key}`;
+
     const response = await fetch(url);
-    return response.json();
+    const json = await response.json();
+
+    return json;
   } catch (error) {
     console.error('Error calling: /quotes', error);
     throw error;

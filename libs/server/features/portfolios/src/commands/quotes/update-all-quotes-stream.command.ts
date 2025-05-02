@@ -1,9 +1,9 @@
-import { StreamMessageType } from '@avi/global/models';
-import { serializeToString } from '@avi/global/services';
+import { StreamMessage, StreamMessageType } from '@avi/global/models';
+import { deserializeFromString, serializeToString } from '@avi/global/services';
 import { WebSocket } from 'ws';
 import { processUpdatedQuotes } from '../../services/quotes/quote-process';
 
-const stringDictionary: Record<StreamMessageType, (ws: WebSocket, ...args: any[]) => void> = {
+const stringDictionary: Record<StreamMessageType, (ws: WebSocket, ...args: unknown[]) => void> = {
   ['update_all_quotes']: processUpdatedQuotes,
 };
 
@@ -11,9 +11,9 @@ export const updateAllQuotesStreamHandler = async (ws: WebSocket) => {
   console.log('Client connected');
 
   ws.on('message', (data: string) => {
-    const message = JSON.parse(data.toString()) as { type: StreamMessageType; payload: any };
+    const message = deserializeFromString(data) as StreamMessage<null>;
     console.log(`Received message: ${message}`);
-    stringDictionary?.[message.type]?.(ws, message.payload);
+    stringDictionary?.[message.type]?.(ws, null);
     // Send a fake response
     ws.send(serializeToString({ message: `Fake response ${message}` }));
   });
